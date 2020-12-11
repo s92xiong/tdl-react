@@ -6,33 +6,32 @@ import Header from './components/header/Header.jsx';
 import Sidebar from './components/sidebar/Sidebar';
 
 function App() {
-  const [isListSelected, setListSelected] = useState(false);
-  const [currentList, setCurrentList] = useState({});
+  const [categorySelected, setCategorySelected] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState({});
   const [categories, setCategories] = useState([]);
-  const inputListRef = useRef();
+  const inputFieldRef = useRef();
 
   const { 
-    addNewList,
-    changeList, 
-    deleteList 
-  } = eventHandlers(categories, setCategories, setListSelected, inputListRef, currentList, setCurrentList);
+    addNewCategory,
+    changeCategory, 
+    deleteCategory 
+  } = eventHandlers(categories, setCategories, setCategorySelected, inputFieldRef, currentCategory, setCurrentCategory);
 
   return (
     <div className="App">
       <Header />
       <div className="container">
         <Sidebar 
-          handleSubmit={addNewList} 
-          handleRef={inputListRef}
-          setListCategory={setCategories}
+          handleSubmit={addNewCategory} 
+          handleRef={inputFieldRef}
           array={categories}
-          changeList={changeList}
+          changeCategory={changeCategory}
         />
         <Content
-          currentList={currentList.name}
-          listCategory={categories}
-          isListSelected={isListSelected}
-          handleDeleteList={deleteList}
+          currentCategory={currentCategory}
+          categories={categories}
+          categorySelected={categorySelected}
+          handleDeleteCategory={deleteCategory}
         />
       </div>
     </div>

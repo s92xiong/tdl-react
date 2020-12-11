@@ -1,12 +1,12 @@
 import React from "react";
 
-const RenderLists = ({ array, changeList }) => {
+const RenderLists = ({ array, changeCategory }) => {
   return array.map((element, i) => {
     return (
       <li 
         key={i} 
         data-index={i}
-        onClick={changeList}
+        onClick={changeCategory}
       >
         {element}
       </li>

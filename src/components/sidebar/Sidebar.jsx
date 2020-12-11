@@ -2,7 +2,7 @@ import React from "react";
 import RenderLists from "./RenderLists";
 import "./sidebar.css";
 
-const Sidebar = ({ handleSubmit, handleRef, array, changeList }) => {
+const Sidebar = ({ handleSubmit, handleRef, array, changeCategory }) => {
   return (
     <div className="sidebar">
       <form onSubmit={handleSubmit}>
@@ -18,7 +18,7 @@ const Sidebar = ({ handleSubmit, handleRef, array, changeList }) => {
         <ul>
           <RenderLists 
             array={array} 
-            changeList={changeList}
+            changeCategory={changeCategory}
           />
         </ul>
       </div>
