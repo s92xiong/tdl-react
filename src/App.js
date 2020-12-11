@@ -8,15 +8,15 @@ import Sidebar from './components/sidebar/Sidebar';
 function App() {
   const [isListSelected, setListSelected] = useState(false);
   const [currentList, setCurrentList] = useState({});
-  const [listCategory, setListCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
   const inputListRef = useRef();
 
   const { 
     addNewList,
     changeList, 
     deleteList 
-  } = eventHandlers(listCategory, setListCategory, setListSelected, inputListRef, currentList, setCurrentList);
-  
+  } = eventHandlers(categories, setCategories, setListSelected, inputListRef, currentList, setCurrentList);
+
   return (
     <div className="App">
       <Header />
@@ -24,13 +24,13 @@ function App() {
         <Sidebar 
           handleSubmit={addNewList} 
           handleRef={inputListRef}
-          setListCategory={setListCategory}
-          array={listCategory}
+          setListCategory={setCategories}
+          array={categories}
           changeList={changeList}
         />
         <Content
           currentList={currentList.name}
-          listCategory={listCategory}
+          listCategory={categories}
           isListSelected={isListSelected}
           handleDeleteList={deleteList}
         />
