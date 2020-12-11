@@ -6,7 +6,6 @@ const RenderLists = ({ array, changeList }) => {
       <li 
         key={i} 
         data-index={i}
-        className="list-category-title"
         onClick={changeList}
       >
         {element}

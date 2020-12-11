@@ -15,16 +15,16 @@
 }
 
 .content-header h2 {
-  color: #2e2e2e;
+  color: #575757;
   margin-left: 20px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 500;
   font-size: 20px;
 }
 
 .trash-icon {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   margin-left: 20px;
   cursor: pointer;
 }
