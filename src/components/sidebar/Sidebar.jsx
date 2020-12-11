@@ -1,5 +1,5 @@
 import React from "react";
-import RenderLists from "./RenderLists";
+import RenderCategories from "./RenderCategories";
 import "./sidebar.css";
 
 const Sidebar = ({ handleSubmit, handleRef, array, changeCategory }) => {
@@ -16,7 +16,7 @@ const Sidebar = ({ handleSubmit, handleRef, array, changeCategory }) => {
       </form>
       <div className="list-categories">
         <ul>
-          <RenderLists 
+          <RenderCategories 
             array={array} 
             changeCategory={changeCategory}
           />

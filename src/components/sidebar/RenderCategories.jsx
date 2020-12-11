@@ -1,6 +1,6 @@
 import React from "react";
 
-const RenderLists = ({ array, changeCategory }) => {
+const RenderCategories = ({ array, changeCategory }) => {
   return array.map((element, i) => {
     return (
       <li 
@@ -14,4 +14,4 @@ const RenderLists = ({ array, changeCategory }) => {
   });
 };
 
-export default RenderLists;
+export default RenderCategories;
