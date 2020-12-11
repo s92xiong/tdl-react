@@ -1,0 +1,33 @@
+.sidebar {
+  width: 320px;
+  height: 100%;
+  background-color: #ececec;
+  overflow: auto;
+  border-right: 1px solid rgb(207, 207, 207);
+}
+
+.input-category {
+  width: 100%;
+  height: 40px;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+  color: #474747;
+  background-color: #ffffff;
+}
+
+.list-categories {
+  width: 100%;
+  height: auto;
+}
+
+.list-categories li {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.list-categories li:hover {
+  background: rgb(243, 243, 243);
+}
