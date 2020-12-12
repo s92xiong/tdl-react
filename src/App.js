@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import './App.css';
 import eventHandlers from './components/logic/eventHandlers';
 import Header from './components/header/Header.jsx';
@@ -12,7 +12,11 @@ function App() {
   const [currentCategory, setCurrentCategory] = useState("");
   const [inputFieldCategory, setInputFieldCategory] = useState("");
 
-  const [categories, setCategories] = useReducer(reducerCategory, []);
+  const [categories, setCategories] = useReducer(reducerCategory, [], () => {
+    // Get categories from localStorage if it exists, else use an empty array
+    const localData = localStorage.getItem("categories");
+    return (localData) ? JSON.parse(localData) : [];
+  });
 
   // Access eventHandler methods
   const { 
@@ -20,6 +24,10 @@ function App() {
   } = eventHandlers(
     categories, setCategories, setCategorySelected, inputFieldCategory, setInputFieldCategory, currentCategory, setCurrentCategory
   );
+
+  useEffect(() => {
+    localStorage.setItem("categories", JSON.stringify(categories));
+  }, [categories])
   
   return (
     <div className="App">
