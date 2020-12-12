@@ -2,22 +2,26 @@ import React from "react";
 import RenderCategories from "./RenderCategories";
 import "./sidebar.css";
 
-const Sidebar = ({ handleSubmit, handleRef, array, changeCategory }) => {
+const Sidebar = ({ setInputFieldCategory, addCategory, categoryName, categories, changeCategory }) => {
+  
+  const handleChange = (e) => setInputFieldCategory(e.target.value);
+
   return (
     <div className="sidebar">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addCategory}>
         <input 
           className="input-category" 
           type="text" 
-          placeholder="Add a list.." 
-          ref={handleRef}
-          maxLength="30"
+          placeholder="Add a list.."
+          maxLength="35"
+          value={categoryName}
+          onChange={handleChange}
         />
       </form>
       <div className="list-categories">
         <ul>
           <RenderCategories 
-            array={array} 
+            categories={categories} 
             changeCategory={changeCategory}
           />
         </ul>

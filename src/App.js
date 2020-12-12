@@ -1,33 +1,35 @@
-import React, { useRef, useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import './App.css';
-import eventHandlers from './components/handlers/eventHandlers';
+import eventHandlers from './components/logic/eventHandlers';
 import Header from './components/header/Header.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Content from './components/content/Content.jsx';
+import reducerCategory from './components/logic/reducerCategory';
 
 function App() {
-  
-  // Initialize state
-  const [categorySelected, setCategorySelected] = useState(false);
-  const [categories, setCategories] = useState([ "Work", "Documentation", "Exercise", "Groceries" ]);
-  const [currentCategory, setCurrentCategory] = useState({});
-  
-  // Obtain a reference to the input field to submit new categories
-  const inputFieldRef = useRef();
 
-  // Get access to methods from eventHandlers.js via destructuring
+  const [categorySelected, setCategorySelected] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState("");
+  const [inputFieldCategory, setInputFieldCategory] = useState("");
+
+  const [categories, setCategories] = useReducer(reducerCategory, []);
+
+  // Access eventHandler methods
   const { 
     addNewCategory, changeCategory, deleteCategory 
-  } = eventHandlers(categories, setCategories, setCategorySelected, inputFieldRef, currentCategory, setCurrentCategory);
-
+  } = eventHandlers(
+    categories, setCategories, setCategorySelected, inputFieldCategory, setInputFieldCategory, currentCategory, setCurrentCategory
+  );
+  
   return (
     <div className="App">
       <Header />
       <div className="container">
         <Sidebar 
-          handleSubmit={addNewCategory} 
-          handleRef={inputFieldRef}
-          array={categories}
+          setInputFieldCategory={setInputFieldCategory}
+          addCategory={addNewCategory} 
+          categoryName={inputFieldCategory}
+          categories={categories}
           changeCategory={changeCategory}
         />
         <Content

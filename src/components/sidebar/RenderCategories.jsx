@@ -1,17 +1,13 @@
 import React from "react";
 
-const RenderCategories = ({ array, changeCategory }) => {
-  return array.map((element, i) => {
-    return (
-      <li 
-        key={i} 
-        data-index={i}
-        onClick={changeCategory}
-      >
-        {element}
-      </li>
-    );
-  });
-};
+const RenderCategories = ({ categories, changeCategory }) => categories.map((category, i) => (
+  <li 
+    key={i}
+    name={category.name}
+    onClick={changeCategory}
+  >
+    {category.name}
+  </li>
+));
 
 export default RenderCategories;
