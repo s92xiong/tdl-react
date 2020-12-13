@@ -1,18 +1,24 @@
-const eventHandlers = (categories, setCategories, setCategorySelected, inputFieldCategory, setInputFieldCategory, currentCategory, setCurrentCategory) => {
+const eventHandlers = (
+    categories, setCategories, 
+    categoryValue, setCategoryValue, 
+    setCategorySelected, 
+    currentCategory, setCurrentCategory,
+    taskValue, setTaskValue,
+  ) => {
   
-  const addNewCategory = (e) => {
+  const addCategory = (e) => {
     e.preventDefault(); 
     
     // Prevent user from submitting empty strings
-    if (inputFieldCategory.length < 1) return;
+    if (categoryValue.length < 1) return;
 
     // Prevent duplicate categories
-    const checkDuplicates = categories.filter(category => inputFieldCategory === category.name);
+    const checkDuplicates = categories.filter(category => categoryValue === category.name);
     if (checkDuplicates.length > 0) return;
     
-    setCategories({ type: "add-category", payload: { name: inputFieldCategory } });
-    setCurrentCategory(inputFieldCategory);
-    setInputFieldCategory("");
+    setCategories({ type: "add-category", payload: { name: categoryValue } });
+    setCurrentCategory(categoryValue);
+    setCategoryValue("");
     setCategorySelected(true);
   };
 
@@ -52,10 +58,17 @@ const eventHandlers = (categories, setCategories, setCategorySelected, inputFiel
     }
   };
 
+  const submitTask = (e) => {
+    e.preventDefault();
+    console.log(taskValue);
+    setTaskValue("");
+  };
+
   return {
-    addNewCategory,
+    addCategory,
     changeCategory,
     deleteCategory,
+    submitTask,
   };
 };
 

@@ -7,44 +7,55 @@ import Content from './components/content/Content.jsx';
 import reducerCategory from './components/logic/reducerCategory';
 
 function App() {
-
-  const [categorySelected, setCategorySelected] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState("");
-  const [inputFieldCategory, setInputFieldCategory] = useState("");
-
+  
   const [categories, setCategories] = useReducer(reducerCategory, [], () => {
     // Get categories from localStorage if it exists, else use an empty array
     const localData = localStorage.getItem("categories");
     return (localData) ? JSON.parse(localData) : [];
   });
 
+  const [categorySelected, setCategorySelected] = useState(false);
+  const [categoryValue, setCategoryValue] = useState("");
+  const [currentCategory, setCurrentCategory] = useState("");
+  const [taskValue, setTaskValue] = useState("");
+
+
   // Access eventHandler methods
   const { 
-    addNewCategory, changeCategory, deleteCategory 
+    addCategory, changeCategory, deleteCategory, submitTask,
   } = eventHandlers(
-    categories, setCategories, setCategorySelected, inputFieldCategory, setInputFieldCategory, currentCategory, setCurrentCategory
+    categories, setCategories, 
+    categoryValue, setCategoryValue, 
+    setCategorySelected,
+    currentCategory, setCurrentCategory, 
+    taskValue, setTaskValue, 
   );
 
   useEffect(() => {
     localStorage.setItem("categories", JSON.stringify(categories));
-  }, [categories])
+  }, [categories]);
   
   return (
     <div className="App">
       <Header />
       <div className="container">
         <Sidebar 
-          setInputFieldCategory={setInputFieldCategory}
-          addCategory={addNewCategory} 
-          categoryName={inputFieldCategory}
           categories={categories}
+          categoryValue={categoryValue}
+          setCategoryValue={setCategoryValue}
+          addCategory={addCategory} 
           changeCategory={changeCategory}
         />
         <Content
+          // Categories props
           currentCategory={currentCategory}
           categories={categories}
           categorySelected={categorySelected}
-          handleDeleteCategory={deleteCategory}
+          deleteCategory={deleteCategory}
+          // Tasks props
+          setTaskValue={setTaskValue}
+          submitTask={submitTask}
+          taskValue={taskValue}
         />
       </div>
     </div>

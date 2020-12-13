@@ -2,9 +2,9 @@ import React from "react";
 import RenderCategories from "./RenderCategories";
 import "./sidebar.css";
 
-const Sidebar = ({ setInputFieldCategory, addCategory, categoryName, categories, changeCategory }) => {
+const Sidebar = ({ categories, categoryValue, setCategoryValue, addCategory, changeCategory }) => {
   
-  const handleChange = (e) => setInputFieldCategory(e.target.value);
+  const handleChange = (e) => setCategoryValue(e.target.value);
 
   return (
     <div className="sidebar">
@@ -14,7 +14,7 @@ const Sidebar = ({ setInputFieldCategory, addCategory, categoryName, categories,
           type="text" 
           placeholder="Add a list.."
           maxLength="35"
-          value={categoryName}
+          value={categoryValue}
           onChange={handleChange}
         />
       </form>

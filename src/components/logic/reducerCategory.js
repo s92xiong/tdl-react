@@ -15,7 +15,8 @@ function reducerCategory(categories, action) {
 function newCategory(name) {
   return {
     name: name,
-    id: Date.now(), 
+    taskList: {},
+    id: Date.now(),
   };
 }
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import trashBin from "../../images/delete.png";
 
-function ContentHeader({ categorySelected, currentCategory, handleDeleteCategory, categories }) {
+function ContentHeader({ categorySelected, currentCategory, deleteCategory, categories }) {
   if (categorySelected) {
     return (
       <div className="content-header">
         <h2>{currentCategory}</h2>
         <img
-          onClick={handleDeleteCategory}
+          onClick={deleteCategory}
           className="trash-icon" 
           src={trashBin} alt=""
         />
