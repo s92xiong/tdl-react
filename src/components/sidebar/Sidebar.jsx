@@ -1,6 +1,6 @@
 import React from "react";
 import RenderCategories from "./RenderCategories";
-import "./sidebar.css";
+import "./styles/sidebar.css";
 
 const Sidebar = ({ categories, categoryValue, setCategoryValue, addCategory, changeCategory }) => {
   

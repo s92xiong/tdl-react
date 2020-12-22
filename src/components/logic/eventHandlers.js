@@ -1,5 +1,5 @@
 const eventHandlers = (
-    categories, setCategories, 
+    categories, dispatch, 
     categoryValue, setCategoryValue, 
     setCategorySelected, 
     currentCategory, setCurrentCategory,
@@ -16,15 +16,22 @@ const eventHandlers = (
     const checkDuplicates = categories.filter(category => categoryValue === category.name);
     if (checkDuplicates.length > 0) return;
     
-    setCategories({ type: "add-category", payload: { name: categoryValue } });
+    dispatch({ type: "add-category", payload: { name: categoryValue } });
+
     setCurrentCategory(categoryValue);
     setCategoryValue("");
     setCategorySelected(true);
   };
 
   const changeCategory = (e) => {
+    let categoryID;
+    categories.forEach(category => {
+      if (category.name === currentCategory) categoryID = category.id;
+    });
+
     setCategorySelected(true);
     setCurrentCategory(e.target.getAttribute("name"));
+    dispatch({ type: "change-category", payload: { id: categoryID } });
   };
 
   const deleteCategory = (e) => {
@@ -38,12 +45,7 @@ const eventHandlers = (
     });
 
     // Update state for categories
-    setCategories({
-      type: "delete-category",
-      payload: {
-        id: categoryID
-      } 
-    });
+    dispatch({ type: "delete-category", payload: { id: categoryID } });
 
     // If you delete a category, set the current category to the next category after it (index 1)
     if (categories.length > 1 && categoryIndex === 0) {
@@ -60,7 +62,7 @@ const eventHandlers = (
 
   const submitTask = (e) => {
     e.preventDefault();
-    console.log(taskValue);
+    dispatch({ type: "add-task", payload: { task: taskValue } });
     setTaskValue("");
   };
 

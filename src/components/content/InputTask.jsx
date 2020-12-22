@@ -1,9 +1,7 @@
 import React from 'react';
-import "./inputTask.css";
+import "./styles/inputTask.css";
 
-function InputTask({ taskValue, setTaskValue, submitTask }) {
-
-  const handleChange = (e) => setTaskValue(e.target.value);
+function InputTask({ taskValue, handleChange, submitTask }) {
 
   return (
     <form onSubmit={submitTask}>

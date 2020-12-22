@@ -1,11 +1,11 @@
 import React from "react";
-import "./content.css";
+import "./styles/content.css";
 import ContentHeader from "./ContentHeader";
 import InputTask from "./InputTask";
 
 const Content = ({ 
   categorySelected, currentCategory, deleteCategory, categories, 
-  setTaskValue, submitTask, taskValue }) => {
+  handleChange, submitTask, taskValue }) => {
 
   return (
     <div className="content">
@@ -17,7 +17,7 @@ const Content = ({
       />
       <InputTask
         taskValue={taskValue}
-        setTaskValue={setTaskValue}
+        handleChange={handleChange}
         submitTask={submitTask}
       />
     </div>
