@@ -1,24 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import eventHandlers from './components/handlers/eventHandlers';
+import eventHandlers from './components/logic/eventHandlers';
 import Header from './components/header/Header.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Content from './components/content/Content.jsx';
+import getCategories from './components/logic/getCategories';
 
 function App() {
   
   // Initialize state
+  const [categories, setCategories] = useState([]);
+  const [categoryInput, setCategoryInput] = useState("");
   const [categorySelected, setCategorySelected] = useState(false);
-  const [categories, setCategories] = useState([ "Work", "Documentation", "Exercise", "Groceries" ]);
-  const [currentCategory, setCurrentCategory] = useState({});
-  
-  // Obtain a reference to the input field to submit new categories
-  const inputFieldRef = useRef();
+
+  const [taskInput, setTaskInput] = useState("");
 
   // Get access to methods from eventHandlers.js via destructuring
   const { 
-    addNewCategory, changeCategory, deleteCategory 
-  } = eventHandlers(categories, setCategories, setCategorySelected, inputFieldRef, currentCategory, setCurrentCategory);
+    addNewCategory, changeCategory, deleteCategory, addTask, handleTaskInput 
+  } = eventHandlers(
+    categories, categoryInput, setCategoryInput, setCategorySelected,
+    taskInput, setTaskInput,
+  );
+
+  useEffect(() => {
+    getCategories(setCategories);
+  }, []);
 
   return (
     <div className="App">
@@ -26,15 +33,21 @@ function App() {
       <div className="container">
         <Sidebar 
           handleSubmit={addNewCategory} 
-          handleRef={inputFieldRef}
+          setCategoryInput={setCategoryInput}
+          categoryInput={categoryInput}
           array={categories}
           changeCategory={changeCategory}
         />
         <Content
-          currentCategory={currentCategory}
+          // Content Header
           categories={categories}
           categorySelected={categorySelected}
           handleDeleteCategory={deleteCategory}
+
+          // Task Content
+          submitTask={addTask}
+          taskInputState={taskInput}
+          handleTaskInput={handleTaskInput}
         />
       </div>
     </div>

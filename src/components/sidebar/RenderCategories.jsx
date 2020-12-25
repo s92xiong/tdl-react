@@ -5,10 +5,10 @@ const RenderCategories = ({ array, changeCategory }) => {
     return (
       <li 
         key={i} 
-        data-index={i}
+        data-id={element.id}
         onClick={changeCategory}
       >
-        {element}
+        {element.name}
       </li>
     );
   });

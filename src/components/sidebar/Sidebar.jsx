@@ -1,8 +1,11 @@
 import React from "react";
 import RenderCategories from "./RenderCategories";
-import "./sidebar.css";
+import "./styles/sidebar.css";
 
-const Sidebar = ({ handleSubmit, handleRef, array, changeCategory }) => {
+const Sidebar = ({ handleSubmit, setCategoryInput, categoryInput, array, changeCategory }) => {
+
+  const handleCategoryInput = (e) => setCategoryInput(e.target.value);
+
   return (
     <div className="sidebar">
       <form onSubmit={handleSubmit}>
@@ -10,16 +13,14 @@ const Sidebar = ({ handleSubmit, handleRef, array, changeCategory }) => {
           className="input-category" 
           type="text" 
           placeholder="Add a list.." 
-          ref={handleRef}
+          value={categoryInput}
+          onChange={handleCategoryInput}
           maxLength="30"
         />
       </form>
       <div className="list-categories">
         <ul>
-          <RenderCategories 
-            array={array} 
-            changeCategory={changeCategory}
-          />
+          <RenderCategories array={array} changeCategory={changeCategory} />
         </ul>
       </div>
     </div>

@@ -1,25 +1,29 @@
 import React from "react";
-import "./content.css";
+import "./styles/content.css";
 import trashBin from "../../images/delete.png";
+import getActiveCategory from "../logic/getActiveCategory";
+import ContentHeader from "./ContentHeader";
+import TaskInput from "./TaskInput";
 
-const Content = ({ categorySelected, currentCategory, handleDeleteCategory, categories }) => {
-  return (
+const Content = ({ categorySelected, handleDeleteCategory, categories,
+  submitTask, taskInputState, handleTaskInput
+  }) => {
+  
+    return (
     <div className="content">
-      {
-        (categorySelected) ?
-        <div className="content-header">
-          <h2>{currentCategory.name}</h2>
-          <img
-            onClick={handleDeleteCategory}
-            className="trash-icon" 
-            src={trashBin} alt=""
-          />
-        </div> 
-        :
-        <div className="content-header">
-          { (categories.length < 1) ? <h2>You have no lists!</h2> : <h2>Click on a list.</h2> }
-        </div>
-      }
+      <ContentHeader 
+        categorySelected={categorySelected}
+        activeCategory={getActiveCategory(categories, "getName")}
+        handleDeleteCategory={handleDeleteCategory}
+        trashBin={trashBin}
+        categories={categories}
+      />
+
+      <TaskInput 
+        submitTask={submitTask}
+        taskInputState={taskInputState}
+        handleTaskInput={handleTaskInput}
+      />
     </div>
   );
 };
