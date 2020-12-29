@@ -1,12 +1,12 @@
 import React from "react";
 import "./styles/content.css";
-import trashBin from "../../images/delete.png";
 import getActiveCategory from "../logic/getActiveCategory";
 import ContentHeader from "./ContentHeader";
 import TaskInput from "./TaskInput";
+import TaskList from "./TaskList";
 
 const Content = ({ categorySelected, handleDeleteCategory, categories,
-  submitTask, taskInputState, handleTaskInput
+  submitTask, taskInputState, handleTaskInput, checkCircle
   }) => {
   
     return (
@@ -15,14 +15,20 @@ const Content = ({ categorySelected, handleDeleteCategory, categories,
         categorySelected={categorySelected}
         activeCategory={getActiveCategory(categories, "getName")}
         handleDeleteCategory={handleDeleteCategory}
-        trashBin={trashBin}
         categories={categories}
       />
 
       <TaskInput 
+        categorySelected={categorySelected}
         submitTask={submitTask}
         taskInputState={taskInputState}
         handleTaskInput={handleTaskInput}
+      />
+
+      <TaskList 
+        categories={categories}
+        categorySelected={categorySelected}
+        checkCircle={checkCircle}
       />
     </div>
   );

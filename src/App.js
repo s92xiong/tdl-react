@@ -17,16 +17,17 @@ function App() {
 
   // Get access to methods from eventHandlers.js via destructuring
   const { 
-    addNewCategory, changeCategory, deleteCategory, addTask, handleTaskInput 
+    addNewCategory, changeCategory, deleteCategory, 
+    addTask, handleTaskInput, checkCircle, 
   } = eventHandlers(
-    categories, categoryInput, setCategoryInput, setCategorySelected,
+    categories, setCategories, categoryInput, setCategoryInput, setCategorySelected,
     taskInput, setTaskInput,
   );
 
   useEffect(() => {
     getCategories(setCategories);
   }, []);
-
+  
   return (
     <div className="App">
       <Header />
@@ -48,6 +49,7 @@ function App() {
           submitTask={addTask}
           taskInputState={taskInput}
           handleTaskInput={handleTaskInput}
+          checkCircle={checkCircle}
         />
       </div>
     </div>

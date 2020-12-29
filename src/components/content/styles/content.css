@@ -18,13 +18,13 @@
   color: #575757;
   margin-left: 20px;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .trash-icon {
-  width: 17px;
-  height: 17px;
+  font-size: 20px;
   margin-left: 20px;
   cursor: pointer;
+  color: #707070;
 }
