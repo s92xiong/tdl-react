@@ -2,7 +2,7 @@ import React from 'react';
 import getActiveCategory from '../logic/getActiveCategory';
 import "./styles/taskList.css";
 
-function TaskList({ categories, categorySelected, checkCircle }) {
+function TaskList({ categories, categorySelected, checkCircle, deleteTask }) {
 
   const index = getActiveCategory(categories, "getIndex");
   
@@ -28,7 +28,7 @@ function TaskList({ categories, categorySelected, checkCircle }) {
               </div>
               <div className="right-div-task">
                 <i className="fa fa-edit edit-icon-task" aria-hidden="true"></i>
-                <i className="fa fa-trash trash-icon-task" aria-hidden="true"></i>
+                <i data-index={i} onClick={deleteTask} className="fa fa-trash trash-icon-task" aria-hidden="true"></i>
               </div>
             </div>
           ))

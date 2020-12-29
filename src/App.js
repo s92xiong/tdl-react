@@ -18,7 +18,7 @@ function App() {
   // Get access to methods from eventHandlers.js via destructuring
   const { 
     addNewCategory, changeCategory, deleteCategory, 
-    addTask, handleTaskInput, checkCircle, 
+    addTask, handleTaskInput, checkCircle, deleteTask,
   } = eventHandlers(
     categories, setCategories, categoryInput, setCategoryInput, setCategorySelected,
     taskInput, setTaskInput,
@@ -50,6 +50,7 @@ function App() {
           taskInputState={taskInput}
           handleTaskInput={handleTaskInput}
           checkCircle={checkCircle}
+          deleteTask={deleteTask}
         />
       </div>
     </div>

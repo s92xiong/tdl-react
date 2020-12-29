@@ -8,8 +8,9 @@ const eventHandlers = (
 
   // Initialize a constant variable for firebase
   const db = firebase.firestore();
+  const categoryIndex = getActiveCategory(categories, "getIndex");
   
-  // ADD A CATEGORY IN THE SIDEBAR
+
   const addNewCategory = (e) => {
     e.preventDefault();
 
@@ -42,7 +43,7 @@ const eventHandlers = (
     setCategoryInput("");
   };
 
-  // CHANGE CATEGORY WHEN A CATEGORY (IN THE SIDEBAR) IS CLICKED
+
   const changeCategory = (e) => {
     setCategorySelected(true);
 
@@ -60,21 +61,16 @@ const eventHandlers = (
     return targetDocument.update({ active: true });
   };
 
-  // DELETE A CATEGORY
-  const deleteCategory = (e) => {
-    // Get the id and index of the document/category you want to delete
-    const id = getActiveCategory(categories, "getID");
-    const index = getActiveCategory(categories, "getIndex");
 
-    // Delete the document
-    db.collection("categories").doc(id).delete()
-    .then(() => console.log(`Document ${id} successfully deleted!`))
-    .catch(error => console.error(`Error removing document ${id}: ${error}`));
+  const deleteCategory = (e) => {
+    db.collection("categories").doc(categories[categoryIndex].id).delete()
+    .then(() => console.log(`Document successfully deleted!`))
+    .catch(error => console.error(`Error removing document ${error}`));
 
     // Activate another category only if there is at least 1 remaining category after the delete
     if (categories.length > 1) {
       // If the first category in the list was deleted, activate the second category in the list
-      if (index === 0) {
+      if (categoryIndex === 0) {
         const targetDocument = db.collection("categories").doc(categories[1].id);
         return targetDocument.update({ active: true })
         .then(() => console.log(`Category with the ${categories[1].id} is now active!`))
@@ -91,7 +87,7 @@ const eventHandlers = (
     setCategorySelected(false);
   };
 
-  // ADD A TASK
+  
   const addTask = (e) => {
     e.preventDefault();
     const index = getActiveCategory(categories, "getIndex");
@@ -116,21 +112,33 @@ const eventHandlers = (
     setTaskInput("");
   };
 
+
   const handleTaskInput = (e) => setTaskInput(e.target.value);
 
+
   const checkCircle = (e) => {
-    const categoryIndex = getActiveCategory(categories, "getIndex");
     const taskIndex = Number(e.target.dataset.index);
 
-    // Create new state and use this to update the database
+    // Copy state and use it to update the database
     const newCategories = [...categories];
     newCategories[categoryIndex].tasks[taskIndex].complete = !newCategories[categoryIndex].tasks[taskIndex].complete;
 
     db.collection("categories").doc(categories[categoryIndex].id).update({ 
       tasks: newCategories[categoryIndex].tasks 
     });
-    
-    setTaskInput("");
+  };
+
+  
+  const deleteTask = (e) => {
+    const taskIndex = Number(e.target.dataset.index);
+
+    // Copy state and use it to update the database
+    const newCategories = [...categories];
+    newCategories[categoryIndex].tasks.splice(taskIndex, 1);
+
+    db.collection("categories").doc(categories[categoryIndex].id).update({ 
+      tasks: newCategories[categoryIndex].tasks 
+    });
   };
 
   return {
@@ -140,6 +148,7 @@ const eventHandlers = (
     addTask,
     handleTaskInput,
     checkCircle,
+    deleteTask,
   };
 };
 
