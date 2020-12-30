@@ -82,9 +82,9 @@ const eventHandlers = (
         .then(() => console.log(`Category with the ${categories[0].id} is now active!`))
         .catch((error) => console.error("Error updating document: ", error));
       }
+    } else if (categories.length <= 1) {
+      setCategorySelected(false);
     }
-
-    setCategorySelected(false);
   };
 
   
