@@ -12,7 +12,7 @@ const Sidebar = ({ handleSubmit, setCategoryInput, categoryInput, array, changeC
         <input 
           className="input-category" 
           type="text" 
-          placeholder="Add a list.." 
+          placeholder="＋ New list" 
           value={categoryInput}
           onChange={handleCategoryInput}
           maxLength="30"

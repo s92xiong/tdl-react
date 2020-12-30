@@ -2,10 +2,9 @@ import firebase from "../../firebase";
 
 // Create real-time subscription to the database
 function getCategories(setCategories) {
-  const database = firebase.firestore();
-  database.collection("categories").onSnapshot(snapshot => {
-    // Iterate through documents in the collection, merge the document's id with the..
-    // ..pre-existing object data in the document, then update the state
+  const db = firebase.firestore();
+  db.collection("categories").onSnapshot(snapshot => {
+    // Iterate through docs in collection, merge the doc's id with the pre-existing object data in the document, update the state
     const newCategories = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),

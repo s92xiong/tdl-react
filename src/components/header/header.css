@@ -1,9 +1,9 @@
 .header {
   width: 100%;
-  height: 70px;
+  height: 60px;
   display: flex;
   align-items: center;
-  background-color: #587bbb;
+  background-color: #5353ffcb;
 }
 
 .header h1 {

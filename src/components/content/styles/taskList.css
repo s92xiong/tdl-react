@@ -6,14 +6,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 30px 0 30px;
+  margin: 0 40px 0 40px;
   padding: 15px;
   border-bottom: 1px dotted #969696;
 }
 
 .task-item p {
-  font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-family: 'Comfortaa', cursive;
+  /* font-family: 'Rubik', sans-serif; */
   font-weight: 300;
 }
 
@@ -22,7 +23,7 @@
 }
 
 .left-div-task {
-  font-size: 22px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   color: #575757;
@@ -30,6 +31,7 @@
 
 .fa-check-circle {
   margin-right: 20px;
+  margin-bottom: 2px;
 }
 
 .check-complete {
@@ -50,6 +52,15 @@
   color: #707070;
 }
 
-.edit-icon-task {
+/* .edit-icon-task {
   margin-top: 3px;
+} */
+
+.fa-trash {
+  font-size: 20px;
+  color: #707070;
+}
+
+.fa-trash:hover {
+  color: #0000ff;
 }

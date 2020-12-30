@@ -116,13 +116,11 @@ const eventHandlers = (
   const handleTaskInput = (e) => setTaskInput(e.target.value);
 
 
-  const checkCircle = (e) => {
+  const completeTask = (e) => {
     const taskIndex = Number(e.target.dataset.index);
-
-    // Copy state and use it to update the database
     const newCategories = [...categories];
+    // Toggle true/false for task completion
     newCategories[categoryIndex].tasks[taskIndex].complete = !newCategories[categoryIndex].tasks[taskIndex].complete;
-
     db.collection("categories").doc(categories[categoryIndex].id).update({ 
       tasks: newCategories[categoryIndex].tasks 
     });
@@ -131,15 +129,19 @@ const eventHandlers = (
   
   const deleteTask = (e) => {
     const taskIndex = Number(e.target.dataset.index);
-
-    // Copy state and use it to update the database
     const newCategories = [...categories];
     newCategories[categoryIndex].tasks.splice(taskIndex, 1);
-
     db.collection("categories").doc(categories[categoryIndex].id).update({ 
       tasks: newCategories[categoryIndex].tasks 
     });
   };
+
+  const clearCompleted = (e) => {
+    const newTaskArray = categories[categoryIndex].tasks.filter(task => !task.complete);
+    db.collection("categories").doc(categories[categoryIndex].id).update({ 
+      tasks: newTaskArray,
+    });
+  }
 
   return {
     addNewCategory,
@@ -147,8 +149,9 @@ const eventHandlers = (
     deleteCategory,
     addTask,
     handleTaskInput,
-    checkCircle,
+    completeTask,
     deleteTask,
+    clearCompleted,
   };
 };
 

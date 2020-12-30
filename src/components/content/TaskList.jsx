@@ -2,7 +2,7 @@ import React from 'react';
 import getActiveCategory from '../logic/getActiveCategory';
 import "./styles/taskList.css";
 
-function TaskList({ categories, categorySelected, checkCircle, deleteTask }) {
+function TaskList({ categories, categorySelected, completeTask, deleteTask }) {
 
   const index = getActiveCategory(categories, "getIndex");
   
@@ -15,10 +15,8 @@ function TaskList({ categories, categorySelected, checkCircle, deleteTask }) {
             <div className="task-item" key={i}>
               <div className="left-div-task">
                 <i 
-                  className={
-                    (task.complete) ? "fa fa-check-circle check-complete" : "fa fa-check-circle"
-                  }
-                  onClick={checkCircle}
+                  className={(task.complete) ? "fa fa-check-circle check-complete" : "fa fa-check-circle"}
+                  onClick={completeTask}
                   data-index={i}
                 ></i>
                 <p className={
@@ -26,10 +24,11 @@ function TaskList({ categories, categorySelected, checkCircle, deleteTask }) {
                 }
                 >{task.taskName}</p>
               </div>
-              <div className="right-div-task">
-                <i className="fa fa-edit edit-icon-task" aria-hidden="true"></i>
-                <i data-index={i} onClick={deleteTask} className="fa fa-trash trash-icon-task" aria-hidden="true"></i>
-              </div>
+              {/* <div className="right-div-task">
+                <i className="fa fa-edit edit-icon-task"></i>
+                <i data-index={i} onClick={deleteTask} className="fa fa-trash trash-icon-task"></i>
+              </div> */}
+              <i data-index={i} onClick={deleteTask} className="fa fa-trash trash-icon-task"></i>
             </div>
           ))
         }

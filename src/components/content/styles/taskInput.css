@@ -1,10 +1,39 @@
+.task-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 25px 0 25px;
+  margin-bottom: 15px;
+}
+
 .task-input input {
   border: none;
   outline: none;
-  width: 100%;
+  width: 400px;
   height: 40px;
-  padding-left: 25px;
-  font-size: 16px;
+  font-size: 15px;
   font-family: 'Open Sans', sans-serif;
   color: #474747;
+  margin: 2px 0 0 0;
+  background: none;
+  border-bottom: 1px solid rgba(103, 103, 255, 0.521);
+}
+
+.task-input input::placeholder {
+  color: #5353ff;
+}
+
+.task-input button {
+  width: 130px;
+  height: 28px;
+  border: none;
+  background-color: #e63d0a;
+  color: #ffffff;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.task-input button:hover {
+  background-color: #e63d0adc;
 }

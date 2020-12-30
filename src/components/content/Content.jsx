@@ -5,10 +5,9 @@ import ContentHeader from "./ContentHeader";
 import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 
-const Content = ({ categorySelected, handleDeleteCategory, categories,
-  submitTask, taskInputState, handleTaskInput, checkCircle, deleteTask
-  }) => {
-  
+const Content = ({ categorySelected, handleDeleteCategory, categories, submitTask,
+  taskInputState, handleTaskInput, completeTask, deleteTask, clearCompleted }) => {
+    
     return (
     <div className="content">
       <ContentHeader 
@@ -23,12 +22,13 @@ const Content = ({ categorySelected, handleDeleteCategory, categories,
         submitTask={submitTask}
         taskInputState={taskInputState}
         handleTaskInput={handleTaskInput}
+        clearCompleted={clearCompleted}
       />
 
       <TaskList 
         categories={categories}
         categorySelected={categorySelected}
-        checkCircle={checkCircle}
+        completeTask={completeTask}
         deleteTask={deleteTask}
       />
     </div>
