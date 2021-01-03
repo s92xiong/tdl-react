@@ -36,4 +36,5 @@
 
 .task-input button:hover {
   background-color: #e63d0adc;
+  outline: none;
 }

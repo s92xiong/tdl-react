@@ -1,4 +1,4 @@
-import firebase from "../../firebase";
+import { firestore } from "../../firebase";
 import getActiveCategory from "./getActiveCategory";
 
 const eventHandlers = (
@@ -6,10 +6,7 @@ const eventHandlers = (
   taskInput, setTaskInput,
   ) => {
 
-  // Initialize a constant variable for firebase
-  const db = firebase.firestore();
-  const categoryIndex = getActiveCategory(categories, "getIndex");
-  
+  const categoryIndex = getActiveCategory(categories, "getIndex");  
 
   const addNewCategory = (e) => {
     e.preventDefault();
@@ -24,13 +21,13 @@ const eventHandlers = (
 
     // Set all categories to "active: false", there should only be 1 active category/document
     if (categories.length > 1) {
-      db.collection("categories").get()
+      firestore.collection("categories").get()
       .then(snapshot => snapshot.docs.forEach(doc => doc.ref.update({ active: false })))
       .catch(error => console.error(`Error updating documents in categories: ${error}`));
     }
 
     // Add the new document/category to the db
-    db.collection("categories").add({
+    firestore.collection("categories").add({
       active: true,
       name: categoryInput,
       tasks: [],
@@ -50,20 +47,20 @@ const eventHandlers = (
     // Disable currently active category
     categories.forEach(category => {
       if (category.active) {
-        const document = db.collection("categories").doc(category.id);
+        const document = firestore.collection("categories").doc(category.id);
         document.update({ active: false });
       }
     });
 
     // Activate new category
     const docID = e.target.dataset.id;
-    const targetDocument = db.collection("categories").doc(docID);
+    const targetDocument = firestore.collection("categories").doc(docID);
     return targetDocument.update({ active: true });
   };
 
 
   const deleteCategory = (e) => {
-    db.collection("categories").doc(categories[categoryIndex].id).delete()
+    firestore.collection("categories").doc(categories[categoryIndex].id).delete()
     .then(() => console.log(`Document successfully deleted!`))
     .catch(error => console.error(`Error removing document ${error}`));
 
@@ -71,15 +68,15 @@ const eventHandlers = (
     if (categories.length > 1) {
       // If the first category in the list was deleted, activate the second category in the list
       if (categoryIndex === 0) {
-        const targetDocument = db.collection("categories").doc(categories[1].id);
+        const targetDocument = firestore.collection("categories").doc(categories[1].id);
         return targetDocument.update({ active: true })
         .then(() => console.log(`Category with the ${categories[1].id} is now active!`))
         .catch((error) => console.error("Error updating document: ", error));
       } else {
         // Otherwise set the first category to be active
-        const targetDocument = db.collection("categories").doc(categories[0].id);
+        const targetDocument = firestore.collection("categories").doc(categories[0].id);
         return targetDocument.update({ active: true })
-        .then(() => console.log(`Category with the ${categories[0].id} is now active!`))
+        .then(() => console.log(`Category with ID of ${categories[0].id} is now active!`))
         .catch((error) => console.error("Error updating document: ", error));
       }
     } else if (categories.length <= 1) {
@@ -104,7 +101,7 @@ const eventHandlers = (
     setCategories(newCategories);
 
     // Update the taskList
-    db.collection("categories").doc(id).update({ 
+    firestore.collection("categories").doc(id).update({ 
       tasks: newCategories[index].tasks 
     })
     .then(() => console.log(`Added new task: ${taskInput}!`))
@@ -121,7 +118,7 @@ const eventHandlers = (
     const newCategories = [...categories];
     // Toggle true/false for task completion
     newCategories[categoryIndex].tasks[taskIndex].complete = !newCategories[categoryIndex].tasks[taskIndex].complete;
-    db.collection("categories").doc(categories[categoryIndex].id).update({ 
+    firestore.collection("categories").doc(categories[categoryIndex].id).update({ 
       tasks: newCategories[categoryIndex].tasks 
     });
   };
@@ -131,14 +128,14 @@ const eventHandlers = (
     const taskIndex = Number(e.target.dataset.index);
     const newCategories = [...categories];
     newCategories[categoryIndex].tasks.splice(taskIndex, 1);
-    db.collection("categories").doc(categories[categoryIndex].id).update({ 
+    firestore.collection("categories").doc(categories[categoryIndex].id).update({ 
       tasks: newCategories[categoryIndex].tasks 
     });
   };
 
   const clearCompleted = (e) => {
     const newTaskArray = categories[categoryIndex].tasks.filter(task => !task.complete);
-    db.collection("categories").doc(categories[categoryIndex].id).update({ 
+    firestore.collection("categories").doc(categories[categoryIndex].id).update({ 
       tasks: newTaskArray,
     });
   }

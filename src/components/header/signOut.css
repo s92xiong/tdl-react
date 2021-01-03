@@ -1,0 +1,45 @@
+.sign-out {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  width: auto;
+}
+
+.user-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  border: 1px solid #ffffff49;
+  cursor: pointer;
+}
+
+.sign-out p {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.modal {
+  cursor: pointer;
+  position: fixed;
+  top: 63px;
+  right: 5px;
+  width: 80px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 1px rgb(204, 204, 204) solid;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: rgb(110, 110, 110);
+  transition: 0.2s;
+  box-shadow: 0 30px 40px rgba(0,0,0,.1);
+}
+
+.modal:hover {
+  background-color: rgb(245, 245, 245);
+}

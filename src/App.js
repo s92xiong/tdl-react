@@ -5,10 +5,16 @@ import Header from './components/header/Header.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Content from './components/content/Content.jsx';
 import getCategories from './components/logic/getCategories';
+import firebase from "firebase/app";
+import { useAuthState } from "react-firebase-hooks/auth";
+// import { useCollectionData } from "react-firebase-hooks/firestore";
+import { auth } from './firebase';
+
 
 function App() {
+
+  const [user] = useAuthState(auth);
   
-  // Initialize state
   const [categories, setCategories] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
   const [categorySelected, setCategorySelected] = useState(false);
@@ -24,6 +30,11 @@ function App() {
     taskInput, setTaskInput,
   );
 
+  const signInWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
+  };
+
   useEffect(() => {
     getCategories(setCategories);
   }, []);
@@ -31,29 +42,36 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="container">
-        <Sidebar 
-          handleSubmit={addNewCategory} 
-          setCategoryInput={setCategoryInput}
-          categoryInput={categoryInput}
-          array={categories}
-          changeCategory={changeCategory}
-        />
-        <Content
-          // Content Header
-          categories={categories}
-          categorySelected={categorySelected}
-          handleDeleteCategory={deleteCategory}
+      {
+        (!user) ?
+        <div className="container-sign-in">
+          <button onClick={signInWithGoogle}>Sign in with Google</button>
+        </div>
+        :
+        <div className="container">
+          <Sidebar 
+            handleSubmit={addNewCategory} 
+            setCategoryInput={setCategoryInput}
+            categoryInput={categoryInput}
+            array={categories}
+            changeCategory={changeCategory}
+          />
+          <Content
+            // Content Header
+            categories={categories}
+            categorySelected={categorySelected}
+            handleDeleteCategory={deleteCategory}
 
-          // Task Content
-          submitTask={addTask}
-          taskInputState={taskInput}
-          handleTaskInput={handleTaskInput}
-          completeTask={completeTask}
-          deleteTask={deleteTask}
-          clearCompleted={clearCompleted}
-        />
-      </div>
+            // Task Content
+            submitTask={addTask}
+            taskInputState={taskInput}
+            handleTaskInput={handleTaskInput}
+            completeTask={completeTask}
+            deleteTask={deleteTask}
+            clearCompleted={clearCompleted}
+          />
+        </div>
+      }
     </div>
   );
 }
