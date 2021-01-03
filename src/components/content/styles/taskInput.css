@@ -28,13 +28,21 @@
   width: 130px;
   height: 28px;
   border: none;
-  background-color: #e63d0a;
+  background-color: #28bb4d;
   color: #ffffff;
-  transition: 1s;
+  transition: 0.2s;
   cursor: pointer;
+  border-radius: 7px;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently */
+  outline: none;
 }
 
 .task-input button:hover {
-  background-color: #e63d0adc;
+  background-color: #ec5d31dc;
   outline: none;
 }

@@ -14,6 +14,8 @@ import { auth } from './firebase';
 function App() {
 
   const [user] = useAuthState(auth);
+  // eslint-disable-next-line no-unused-vars
+  const [userID, setUserID] = useState("");
   
   const [categories, setCategories] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");

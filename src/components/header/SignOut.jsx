@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import OutsideClickHandler from "react-outside-click-handler";
 import { auth } from "../../firebase";
-import "./signOut.css";
+import OutsideClickHandler from "react-outside-click-handler";
+import "./styles/signOut.css";
 
 function SignOut() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -9,6 +9,7 @@ function SignOut() {
   const openModal = () => setModalOpen(!modalOpen);
   const closeModal = (e) => (e.target.className !== "modal") && setModalOpen(false);
   const signOut = () => {
+    console.log(auth.currentUser.uid);
     setModalOpen(false);
     auth.signOut();
   };
