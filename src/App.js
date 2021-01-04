@@ -5,17 +5,14 @@ import Header from './components/header/Header.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Content from './components/content/Content.jsx';
 import getCategories from './components/logic/getCategories';
-import firebase from "firebase/app";
+import { auth } from './firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
 // import { useCollectionData } from "react-firebase-hooks/firestore";
-import { auth } from './firebase';
 
 
 function App() {
 
   const [user] = useAuthState(auth);
-  // eslint-disable-next-line no-unused-vars
-  const [userID, setUserID] = useState("");
   
   const [categories, setCategories] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
@@ -23,19 +20,15 @@ function App() {
 
   const [taskInput, setTaskInput] = useState("");
 
-  // Get access to methods from eventHandlers.js via destructuring
   const { 
-    addNewCategory, changeCategory, deleteCategory, 
-    addTask, handleTaskInput, completeTask, deleteTask, clearCompleted,
+    // Access methods from eventHandlers.js
+    addNewCategory, changeCategory, deleteCategory, addTask, handleTaskInput, 
+    completeTask, deleteTask, clearCompleted, signInWithGoogle
   } = eventHandlers(
+    // Insert arguments here
     categories, setCategories, categoryInput, setCategoryInput, setCategorySelected,
     taskInput, setTaskInput,
   );
-
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
-  };
 
   useEffect(() => {
     getCategories(setCategories);

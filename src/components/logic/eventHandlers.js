@@ -1,4 +1,5 @@
-import { firestore } from "../../firebase";
+import firebase from "firebase/app";
+import { auth, firestore } from "../../firebase";
 import getActiveCategory from "./getActiveCategory";
 
 const eventHandlers = (
@@ -31,6 +32,7 @@ const eventHandlers = (
       active: true,
       name: categoryInput,
       tasks: [],
+      // createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     }).then(() => console.log("Document successfully written!"))
     .catch(error => console.error("Error writing document: ", error));
 
@@ -140,6 +142,25 @@ const eventHandlers = (
     });
   }
 
+  const signInWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).then((result) => {
+      // If user is not already in the firestore db, add new user to "users" collection
+      firestore.collection("users").get().then(snapshot => {
+        let isUserInDatabase;
+        snapshot.docs.forEach(doc => (doc.data().id === result.user.uid) ? isUserInDatabase = true : null);
+        if (!isUserInDatabase) {
+          firestore.collection("users").add({
+            email: auth.currentUser.email,
+            id: auth.currentUser.uid,
+          }).then(() => console.log(`User has been added to the 'users' database!`));
+        } else {
+          console.log("User is already in the database!");
+        }
+      });
+    }).catch(error => console.log(error));
+  };
+
   return {
     addNewCategory,
     changeCategory,
@@ -149,6 +170,7 @@ const eventHandlers = (
     completeTask,
     deleteTask,
     clearCompleted,
+    signInWithGoogle,
   };
 };
 

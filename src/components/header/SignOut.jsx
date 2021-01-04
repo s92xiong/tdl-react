@@ -9,7 +9,7 @@ function SignOut() {
   const openModal = () => setModalOpen(!modalOpen);
   const closeModal = (e) => (e.target.className !== "modal") && setModalOpen(false);
   const signOut = () => {
-    console.log(auth.currentUser.uid);
+    // console.log(auth.currentUser.uid);
     setModalOpen(false);
     auth.signOut();
   };
