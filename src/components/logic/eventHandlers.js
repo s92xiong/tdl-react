@@ -15,11 +15,6 @@ const eventHandlers = (
     // Prevent user from submitting empty strings
     if (categoryInput.length < 1) return;
 
-    // Prevent duplicate naming for categories
-    let duplicate = false;
-    categories.forEach(category => (category.name === categoryInput) ? duplicate = true : null);
-    if (duplicate) return;
-
     // Set all categories to "active: false", there should only be 1 active category/document
     if (categories.length > 1) {
       firestore.collection("categories").get()
