@@ -16,7 +16,9 @@ const eventHandlers = (
     if (categoryInput.length < 1) return;
 
     // Inactive the currently active category
-    firestore.collection("categories").doc(categories[categoryIndex].id).update({ active: false });
+    if (categories.length > 0) {
+      firestore.collection("categories").doc(categories[categoryIndex].id).update({ active: false });
+    }
 
     // Add the new document/category to the db, set active to true
     firestore.collection("categories").add({
