@@ -1,15 +1,14 @@
 import React from 'react';
+import getActiveCategory from '../logic/getActiveCategory';
 
-function ContentHeader({ categorySelected, activeCategory, handleDeleteCategory, categories }) {
+function ContentHeader({ categorySelected, handleDeleteCategory, categories }) {
+  const activeCategory = getActiveCategory(categories, "getName");
+
   if (categorySelected) {
     return (
       <div className="content-header">
         <h2>{activeCategory}</h2>
-        <i
-          onClick={handleDeleteCategory}
-          className="fa fa-trash trash-icon" 
-          aria-hidden="true"
-        ></i>
+        { (activeCategory) ? <i onClick={handleDeleteCategory} className="fa fa-trash trash-icon"></i> : <></> }
       </div> 
     );
   } else {

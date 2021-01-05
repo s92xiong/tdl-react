@@ -11,28 +11,32 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 
 function App() {
-
+  // useAuthState checks if user is logged in and returns an object, otherwise return null
   const [user] = useAuthState(auth);
   
+  // Initialize array state which is a copy of the data from the Firestore collection "categories"
   const [categories, setCategories] = useState([]);
+
+  // Input field to add a category
   const [categoryInput, setCategoryInput] = useState("");
   
-  const [categorySelected, setCategorySelected] = useState(false);
+  // Initialize variable state to be used for conditional rendering of content header in ContentHeader.jsx
+  const [categorySelected, setCategorySelected] = useState(true);
 
+  // Input field to add tasks
   const [taskInput, setTaskInput] = useState("");
 
   const { 
-    // Access methods from eventHandlers.js
-    addNewCategory, changeCategory, deleteCategory, addTask, handleTaskInput, 
+    // Retrieve methods from eventHandlers.js
+    addCategory, changeCategory, deleteCategory, addTask, handleTaskInput, 
     completeTask, deleteTask, clearCompleted, signInWithGoogle
   } = eventHandlers(
     // Insert arguments here
-    categories, setCategories, categoryInput, setCategoryInput, setCategorySelected,
-    taskInput, setTaskInput,
+    categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
   );
 
   useEffect(() => {
-    // Execute only if user is logged in, otherwise 'auth' in getCategories.js will cause a crash
+    // Execute only if "user" is logged in, otherwise 'auth' in getCategories.js will cause a crash
     if (user) getCategories(setCategories);
    }, [user]);
   
@@ -41,13 +45,15 @@ function App() {
       <Header />
       {
         (!user) ?
+        // Display the following code if the user is NOT signed in
         <div className="container-sign-in">
           <button onClick={signInWithGoogle}>Sign in with Google</button>
         </div>
         :
+        // Display the following code if the user IS signed in
         <div className="container">
           <Sidebar 
-            handleSubmit={addNewCategory} 
+            handleSubmit={addCategory} 
             setCategoryInput={setCategoryInput}
             categoryInput={categoryInput}
             categories={categories}

@@ -4,33 +4,34 @@ import OutsideClickHandler from "react-outside-click-handler";
 import "./styles/signOut.css";
 
 function SignOut() {
+  
+  // Initialize variable state to determine if the SignOut modal is open/close
   const [modalOpen, setModalOpen] = useState(false);
 
+  // Event handlers to open/close modal
   const openModal = () => setModalOpen(!modalOpen);
   const closeModal = (e) => (e.target.className !== "modal") && setModalOpen(false);
+  
   const signOut = () => {
-    // console.log(auth.currentUser.uid);
     setModalOpen(false);
     auth.signOut();
   };
 
+  // Don't show a sign out button if user is not signed in
   if (auth.currentUser) {
     return (
       <div className="sign-out">
         <p>{auth.currentUser.displayName}</p>
         <OutsideClickHandler onOutsideClick={closeModal}>
-          <img src={auth.currentUser.photoURL} onClick={openModal} alt="" className="user-icon"/>
+          <img src={auth.currentUser.photoURL} onClick={openModal} alt="" className="user-icon" />
         </OutsideClickHandler>
-        {
-          (modalOpen) &&
-          <div className="modal" onClick={signOut}>Sign Out</div>
-        }
+        { (modalOpen) && <div className="modal" onClick={signOut}>Sign Out</div> }
       </div>
     );
   } else {
     return (
       <></>
-    )
+    );
   }
 }
 

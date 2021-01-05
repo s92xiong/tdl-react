@@ -28,7 +28,7 @@ function TaskList({ categories, categorySelected, completeTask, deleteTask }) {
       </div>
     )
   } else {
-    return <div className="empty-div"></div>
+    return <></>;
   }
 }
 
