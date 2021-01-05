@@ -140,23 +140,36 @@ const eventHandlers = (
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider).then((result) => {
-      // If user is not already in the firestore db, add new user to "users" collection
-      firestore.collection("users").get().then(snapshot => {
+      
+      // If the user is signing in for the first time (not in database), add new user to "users" collection
+      firestore.collection("users").get()
+      .then(snapshot => {
+        // Check if the user is in the database
         let isUserInDatabase;
         snapshot.docs.forEach(doc => (doc.data().id === result.user.uid) ? isUserInDatabase = true : null);
-        // The user is registering for the first time
+      
         if (!isUserInDatabase) {
-          // Add to users
+          // Add to "users" collection in Firestore
           firestore.collection("users").add({
             email: auth.currentUser.email,
             id: auth.currentUser.uid,
-          }).then(() => console.log(`User has been added to the 'users' database!`));
-          
-          // Add some stuff to the collection!
-          // .............
-
-        } else {
-          console.log("User is already in the database!");
+          })
+          .then(() => {
+            // Add some categories and tasks for the user to see
+            firestore.collection("categories").add({
+              active: true,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              name: "Today",
+              tasks: [
+                { taskName: "Exercise", complete: false, id: Date.now() },
+                { taskName: "Grocery shopping", complete: true, id: Date.now() },
+                { taskName: "Cook dinner", complete: false, id: Date.now() },
+                { taskName: "Read Firebase Firestore & Auth documentation", complete: false, id: Date.now() },
+              ],
+              userID: auth.currentUser.uid,
+            })
+            .then(() => console.log())
+          });
         }
       });
     }).catch(error => console.log(error));

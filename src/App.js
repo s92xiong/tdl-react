@@ -32,7 +32,7 @@ function App() {
   );
 
   useEffect(() => {
-    // Execute getCategories function only if the user is logged in
+    // Execute only if user is logged in, otherwise 'auth' in getCategories.js will cause a crash
     if (user) getCategories(setCategories);
    }, [user]);
   
