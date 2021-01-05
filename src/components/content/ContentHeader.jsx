@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function ContentHeader({ categorySelected, activeCategory, handleDeleteCategory, categories }) {
   if (categorySelected) {

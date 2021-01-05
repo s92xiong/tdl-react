@@ -16,6 +16,7 @@ function App() {
   
   const [categories, setCategories] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
+  
   const [categorySelected, setCategorySelected] = useState(false);
 
   const [taskInput, setTaskInput] = useState("");
@@ -48,7 +49,7 @@ function App() {
             handleSubmit={addNewCategory} 
             setCategoryInput={setCategoryInput}
             categoryInput={categoryInput}
-            array={categories}
+            categories={categories}
             changeCategory={changeCategory}
           />
           <Content

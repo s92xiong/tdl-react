@@ -27,7 +27,8 @@ const eventHandlers = (
       active: true,
       name: categoryInput,
       tasks: [],
-      // createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      userID: auth.currentUser.uid,
     }).then(() => console.log("Document successfully written!"))
     .catch(error => console.error("Error writing document: ", error));
 
@@ -57,6 +58,7 @@ const eventHandlers = (
 
 
   const deleteCategory = (e) => {
+    // Delete category from Firestore database
     firestore.collection("categories").doc(categories[categoryIndex].id).delete()
     .then(() => console.log(`Document successfully deleted!`))
     .catch(error => console.error(`Error removing document ${error}`));
@@ -144,11 +146,14 @@ const eventHandlers = (
       firestore.collection("users").get().then(snapshot => {
         let isUserInDatabase;
         snapshot.docs.forEach(doc => (doc.data().id === result.user.uid) ? isUserInDatabase = true : null);
+        // The user is registering for the first time
         if (!isUserInDatabase) {
+          // Add to users
           firestore.collection("users").add({
             email: auth.currentUser.email,
             id: auth.currentUser.uid,
           }).then(() => console.log(`User has been added to the 'users' database!`));
+          // Add some stuff to the collection!
         } else {
           console.log("User is already in the database!");
         }

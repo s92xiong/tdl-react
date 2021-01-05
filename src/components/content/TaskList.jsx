@@ -19,15 +19,8 @@ function TaskList({ categories, categorySelected, completeTask, deleteTask }) {
                   onClick={completeTask}
                   data-index={i}
                 ></i>
-                <p className={
-                  (task.complete) ? "paragraph-complete" : "paragraph"
-                }
-                >{task.taskName}</p>
+                <p className={(task.complete) ? "paragraph-complete" : "paragraph"}>{task.taskName}</p>
               </div>
-              {/* <div className="right-div-task">
-                <i className="fa fa-edit edit-icon-task"></i>
-                <i data-index={i} onClick={deleteTask} className="fa fa-trash trash-icon-task"></i>
-              </div> */}
               <i data-index={i} onClick={deleteTask} className="fa fa-trash trash-icon-task"></i>
             </div>
           ))

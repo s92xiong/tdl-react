@@ -1,13 +1,15 @@
-import { firestore } from "../../firebase";
+import { auth, firestore } from "../../firebase";
 
 // Create real-time subscription to the database
 function getCategories(setCategories) {
   firestore.collection("categories").onSnapshot(snapshot => {
-    // Iterate through docs in collection, merge the doc's id with the pre-existing object data in the document, update the state
+    // Merge the document id with the pre-existing object data in the document
+    // Filter through list, return only the documents that belong to the current user logged in
     const newCategories = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
-    }));
+    })).filter(category => category.userID === auth.currentUser.uid);
+
     setCategories(newCategories);
   });
 }

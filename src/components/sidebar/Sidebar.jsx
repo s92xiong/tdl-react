@@ -2,7 +2,7 @@ import React from "react";
 import RenderCategories from "./RenderCategories";
 import "./styles/sidebar.css";
 
-const Sidebar = ({ handleSubmit, setCategoryInput, categoryInput, array, changeCategory }) => {
+const Sidebar = ({ handleSubmit, setCategoryInput, categoryInput, categories, changeCategory }) => {
 
   const handleCategoryInput = (e) => setCategoryInput(e.target.value);
 
@@ -20,7 +20,7 @@ const Sidebar = ({ handleSubmit, setCategoryInput, categoryInput, array, changeC
       </form>
       <div className="list-categories">
         <ul>
-          <RenderCategories array={array} changeCategory={changeCategory} />
+          <RenderCategories categories={categories} changeCategory={changeCategory} />
         </ul>
       </div>
     </div>
