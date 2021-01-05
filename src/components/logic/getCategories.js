@@ -4,7 +4,7 @@ import { auth, firestore } from "../../firebase";
 function getCategories(setCategories) {
   firestore.collection("categories").onSnapshot(snapshot => {
     // Merge the document id with the pre-existing object data in the document
-    // Filter through list, return only the documents that belong to the current user logged in
+    // Filter through list, return documents that belong to the current user logged in
     const newCategories = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),

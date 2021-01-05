@@ -24,7 +24,7 @@ const eventHandlers = (
 
     // Add the new document/category to the db
     firestore.collection("categories").add({
-      active: true,
+      active: false,
       name: categoryInput,
       tasks: [],
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -153,7 +153,10 @@ const eventHandlers = (
             email: auth.currentUser.email,
             id: auth.currentUser.uid,
           }).then(() => console.log(`User has been added to the 'users' database!`));
+          
           // Add some stuff to the collection!
+          
+
         } else {
           console.log("User is already in the database!");
         }
