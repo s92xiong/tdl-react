@@ -15,16 +15,12 @@ const eventHandlers = (
     // Prevent user from submitting empty strings
     if (categoryInput.length < 1) return;
 
-    // Set all categories to "active: false", there should only be 1 active category/document
-    if (categories.length > 1) {
-      firestore.collection("categories").get()
-      .then(snapshot => snapshot.docs.forEach(doc => doc.ref.update({ active: false })))
-      .catch(error => console.error(`Error updating documents in categories: ${error}`));
-    }
+    // Inactive the currently active category
+    firestore.collection("categories").doc(categories[categoryIndex].id).update({ active: false });
 
-    // Add the new document/category to the db
+    // Add the new document/category to the db, set active to true
     firestore.collection("categories").add({
-      active: false,
+      active: true,
       name: categoryInput,
       tasks: [],
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -155,7 +151,7 @@ const eventHandlers = (
           }).then(() => console.log(`User has been added to the 'users' database!`));
           
           // Add some stuff to the collection!
-          
+          // .............
 
         } else {
           console.log("User is already in the database!");

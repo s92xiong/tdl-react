@@ -32,8 +32,9 @@ function App() {
   );
 
   useEffect(() => {
-    getCategories(setCategories);
-  }, []);
+    // Execute getCategories function only if the user is logged in
+    if (user) getCategories(setCategories);
+   }, [user]);
   
   return (
     <div className="App">
