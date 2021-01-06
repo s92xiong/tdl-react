@@ -1,9 +1,6 @@
 import React from "react";
 import "./styles/header.css";
-<<<<<<< HEAD
-=======
 import SignOut from "./SignOut";
->>>>>>> 669f3b3
 
 const Header = () => {
   return (

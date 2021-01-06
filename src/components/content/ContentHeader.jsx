@@ -14,7 +14,7 @@ function ContentHeader({ categorySelected, handleDeleteCategory, categories }) {
   } else {
     return (
       <div className="content-header">
-        { (categories.length < 1) ? <h2>You have no lists!</h2> : <h2>Click on a list</h2> }
+        { (categories.length < 1) ? <h2>You have no lists!</h2> : <h2>Click on a list.</h2> }
       </div>
     );
   }
