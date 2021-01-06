@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, { useEffect, useReducer, useState } from 'react';
-import reducer from './components/logic/reducer';
-=======
 import React, { useState, useEffect } from 'react';
 import './App.css';
->>>>>>> 669f3b3
 import eventHandlers from './components/logic/eventHandlers';
 import Header from './components/header/Header.jsx';
 import LandingPage from './components/landingPage/LandingPage.jsx';
