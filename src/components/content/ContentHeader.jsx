@@ -1,22 +1,20 @@
 import React from 'react';
-import trashBin from "../../images/delete.png";
+import getActiveCategory from '../logic/getActiveCategory';
 
-function ContentHeader({ categorySelected, currentCategory, deleteCategory, categories }) {
+function ContentHeader({ categorySelected, handleDeleteCategory, categories }) {
+  const activeCategory = getActiveCategory(categories, "getName");
+
   if (categorySelected) {
     return (
       <div className="content-header">
-        <h2>{currentCategory}</h2>
-        <img
-          onClick={deleteCategory}
-          className="trash-icon" 
-          src={trashBin} alt=""
-        />
-      </div>
+        <h2>{activeCategory}</h2>
+        { (activeCategory) ? <i onClick={handleDeleteCategory} className="fa fa-trash trash-icon"></i> : <></> }
+      </div> 
     );
   } else {
     return (
       <div className="content-header">
-        { (categories.length < 1) ? <h2>You have no lists!</h2> : <h2>Click on a list.</h2> }
+        { (categories.length < 1) ? <h2>You have no lists!</h2> : <h2>Click on a list</h2> }
       </div>
     );
   }

@@ -1,0 +1,67 @@
+/* .task-list {
+  background-color: rgba(255, 0, 0, 0.534);
+} */
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 40px 0 40px;
+  padding: 15px;
+  border-bottom: 1px dotted #969696;
+}
+
+.task-item p {
+  font-size: 15px;
+  /* font-family: 'Comfortaa', cursive; */
+  /* font-family: 'Rubik', sans-serif; */
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+.fa:hover {
+ cursor: pointer;
+}
+
+.left-div-task {
+  display: flex;
+  align-items: center;
+  color: #575757;
+}
+
+.fa-check-circle {
+  font-size: 21px;
+  margin-right: 20px;
+  margin-bottom: 2px;
+}
+
+.check-complete {
+  color: rgb(35, 233, 35);
+}
+
+.paragraph-complete {
+  color: #bebebe;
+  text-decoration: line-through;
+}
+
+.right-div-task {
+  width: 52px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #707070;
+}
+
+/* .edit-icon-task {
+  margin-top: 3px;
+} */
+
+.fa-trash {
+  font-size: 20px;
+  color: #707070;
+}
+
+.fa-trash:hover {
+  color: #0000ff;
+}

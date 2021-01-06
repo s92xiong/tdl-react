@@ -3,7 +3,8 @@
   height: 70px;
   display: flex;
   align-items: center;
-  background-color: #587bbb;
+  justify-content: space-between;
+  background-color: #5353ffcb;
 }
 
 .header h1 {

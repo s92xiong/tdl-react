@@ -1,73 +1,86 @@
+<<<<<<< HEAD
 import React, { useEffect, useReducer, useState } from 'react';
 import reducer from './components/logic/reducer';
+=======
+import React, { useState, useEffect } from 'react';
+import './App.css';
+>>>>>>> 669f3b3
 import eventHandlers from './components/logic/eventHandlers';
 import Header from './components/header/Header.jsx';
+import LandingPage from './components/landingPage/LandingPage.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Content from './components/content/Content.jsx';
+import getCategories from './components/logic/getCategories';
+import { auth } from './firebase';
+import { useAuthState } from "react-firebase-hooks/auth";
+// import { useCollectionData } from "react-firebase-hooks/firestore";
+
 
 import './App.css';
 
 function App() {
+  // useAuthState checks if user is logged in and returns an object, otherwise return null
+  const [user] = useAuthState(auth);
   
-  // Get categories from localStorage if it exists, else use an empty array
-  const [categories, setCategory] = useReducer(reducer, [], () => {
-    const localData = localStorage.getItem("categories");
-    return (localData) ? JSON.parse(localData) : [];
-  });
+  // Initialize array state which is a copy of the data from the Firestore collection "categories"
+  const [categories, setCategories] = useState([]);
 
-  const [categoryValue, setCategoryValue] = useState(""); // Category input field
-  const [categorySelected, setCategorySelected] = useState(false); // Regulate UI rendering
-  const [currentCategory, setCurrentCategory] = useState(""); // Renders current category that is active
-  const [taskValue, setTaskValue] = useState(""); // for input field
+  // Input field to add a category
+  const [categoryInput, setCategoryInput] = useState("");
+  
+  // Initialize variable state to be used for conditional rendering of content header in ContentHeader.jsx
+  const [categorySelected, setCategorySelected] = useState(false);
+
+  // Input field to add tasks
+  const [taskInput, setTaskInput] = useState("");
 
   const { 
-    // Access eventHandler methods
-    addCategory, changeCategory, deleteCategory, submitTask,
+    // Retrieve methods from eventHandlers.js
+    addCategory, changeCategory, deleteCategory, addTask, handleTaskInput, 
+    completeTask, deleteTask, clearCompleted, signInWithGoogle
   } = eventHandlers(
-    categories, setCategory, 
-    categoryValue, setCategoryValue, 
-    setCategorySelected,
-    currentCategory, setCurrentCategory,
-    taskValue, setTaskValue,
+    // Insert arguments here
+    categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
   );
 
   useEffect(() => {
-    localStorage.setItem("categories", JSON.stringify(categories));
-    console.table(categories);
-  }, [categories]);
-
-  const handleChange = (e) => setTaskValue(e.target.value);
-
-  // YOUR NEXT STEPS:
-    // (1) Submitting a task: use reducerCategory component to add a task to the taskList
-      // (1.1) taskList should be an array
-      // (1.2) Write a function that will add tasks with given props
-    // (2) Render all tasks within each category, tasks per category should be in their own div
-    // (3) The only task div that should be displayed is the one with the category currently active
+    // Execute only if "user" is logged in, otherwise 'auth' in getCategories.js will cause a crash
+    if (user) getCategories(setCategories);
+   }, [user]);
   
   return (
     <div className="App">
       <Header />
-      <div className="container">
-        <Sidebar 
-          categories={categories}
-          categoryValue={categoryValue}
-          setCategoryValue={setCategoryValue}
-          addCategory={addCategory} 
-          changeCategory={changeCategory}
-        />
-        <Content
-          // Categories props
-          currentCategory={currentCategory}
-          categories={categories}
-          categorySelected={categorySelected}
-          deleteCategory={deleteCategory}
-          // Tasks props
-          handleChange={handleChange}
-          submitTask={submitTask}
-          taskValue={taskValue}
-        />
-      </div>
+      {
+        (!user) ?
+        // Display the following code if the user is NOT signed in
+        <LandingPage signInWithGoogle={signInWithGoogle} />
+        :
+        // Display the following code if the user IS signed in
+        <div className="container">
+          <Sidebar 
+            handleSubmit={addCategory} 
+            setCategoryInput={setCategoryInput}
+            categoryInput={categoryInput}
+            categories={categories}
+            changeCategory={changeCategory}
+          />
+          <Content
+            // Content Header
+            categories={categories}
+            categorySelected={categorySelected}
+            handleDeleteCategory={deleteCategory}
+
+            // Task Content
+            submitTask={addTask}
+            taskInputState={taskInput}
+            handleTaskInput={handleTaskInput}
+            completeTask={completeTask}
+            deleteTask={deleteTask}
+            clearCompleted={clearCompleted}
+          />
+        </div>
+      }
     </div>
   );
 }
