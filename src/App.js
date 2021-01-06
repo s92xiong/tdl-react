@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import eventHandlers from './components/logic/eventHandlers';
 import Header from './components/header/Header.jsx';
+import LandingPage from './components/landingPage/LandingPage.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Content from './components/content/Content.jsx';
 import getCategories from './components/logic/getCategories';
@@ -46,9 +47,7 @@ function App() {
       {
         (!user) ?
         // Display the following code if the user is NOT signed in
-        <div className="container-sign-in">
-          <button onClick={signInWithGoogle}>Sign in with Google</button>
-        </div>
+        <LandingPage signInWithGoogle={signInWithGoogle} />
         :
         // Display the following code if the user IS signed in
         <div className="container">

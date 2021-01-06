@@ -16,6 +16,7 @@
   color: #474747;
   background-color: #ffffff;
   font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
 }
 
 .list-categories {
@@ -30,6 +31,7 @@
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
   color: #575757;
+  font-weight: 300;
 }
 
 .li-category-active {
