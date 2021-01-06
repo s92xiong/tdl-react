@@ -14,7 +14,6 @@ function ContentHeader({ categorySelected, handleDeleteCategory, categories }) {
   } else {
     return (
       <div className="content-header">
-        {/* If there are no documents/categories, then execute the code below */}
         { (categories.length < 1) ? <h2>You have no lists!</h2> : <h2>Click on a list</h2> }
       </div>
     );

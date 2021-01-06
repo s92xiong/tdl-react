@@ -22,7 +22,7 @@ function App() {
   const [categoryInput, setCategoryInput] = useState("");
   
   // Initialize variable state to be used for conditional rendering of content header in ContentHeader.jsx
-  const [categorySelected, setCategorySelected] = useState(true);
+  const [categorySelected, setCategorySelected] = useState(false);
 
   // Input field to add tasks
   const [taskInput, setTaskInput] = useState("");

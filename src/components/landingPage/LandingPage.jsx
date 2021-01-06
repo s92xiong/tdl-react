@@ -1,5 +1,6 @@
 import React from 'react';
 import checkmark from "../../images/checkmark.png";
+import './landingPage.css';
 
 function LandingPage(props) {
   return (
