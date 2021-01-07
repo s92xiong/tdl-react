@@ -71,3 +71,28 @@ a:hover {
   text-decoration: underline;
   color: hotpink;
 }
+
+@media (max-width: 500px) {
+  .container-sign-in img {
+    width: 75px;
+    height: 71px;
+  }
+
+  .container-sign-in h1 {
+    font-size: 2.9rem;
+  }
+
+  .container-sign-in h3 {
+    width: 100%;
+    padding: 0;
+    font-size: 1.1rem;
+    padding: 20px 0 20px 0;
+    margin: 10px;
+  }
+
+  .container-sign-in button {
+    height: 50px;
+    width: 200px;
+    font-size: 18px;
+  }
+}
