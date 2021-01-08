@@ -53,10 +53,6 @@
   color: #707070;
 }
 
-/* .edit-icon-task {
-  margin-top: 3px;
-} */
-
 .fa-trash {
   font-size: 20px;
   color: #707070;
@@ -64,4 +60,10 @@
 
 .fa-trash:hover {
   color: #0000ff;
+}
+
+@media (max-width: 700px) {
+  .task-item p {
+    font-size: 17px;
+  }
 }

@@ -13,3 +13,24 @@
   font-size: 27px;
   margin-left: 20px;
 }
+
+.bars {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  /* Remove "To Do" logo and instead add menu bars when width is at 500px */
+  /* Additionally, .content in content.css should have width: 100vw */
+
+  .header h1 {
+    display: none;
+  }
+
+  .bars {
+    display: block;
+    color: #f3f3f3;
+    font-size: 27px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+}

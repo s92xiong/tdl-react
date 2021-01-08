@@ -49,13 +49,26 @@
   outline: none;
 }
 
-@media (max-width: 920px) {
+/* At window width of 920px, prevent compression of the task input field and the "clear completed" button */
+@media (max-width: 925px) {
   .task-input {
     flex-direction: column;
   }
 
-  .task-input button {
-    margin: 25px 0 0 0;
+  .task-input input {
+    max-width: 330px;
+    margin: 10px 0 30px 0;
+
   }
 
+  .task-input button {
+    margin-bottom: 3px;
+  }
+}
+
+/* At 500px, maintain the same padding and margin but now the .content is now 100vw, thus, set task input field to 80vw */
+@media (max-width: 700px) {
+  .task-input input {
+    width: 80vw;
+  }
 }

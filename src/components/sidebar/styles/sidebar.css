@@ -39,3 +39,18 @@
 .list-categories li:hover {
   background: #f3f3f3;
 }
+
+@media (max-width: 700px) {
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: -100vw;
+    transition: 350ms;
+    width: 100vw;
+  }
+
+  .sidebar-open {
+    left: 0;
+    transition: 350ms;
+  }
+}

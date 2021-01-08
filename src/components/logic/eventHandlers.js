@@ -3,7 +3,8 @@ import { auth, firestore } from "../../firebase";
 import getActiveCategory from "./getActiveCategory";
 
 const eventHandlers = (
-    categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput
+    categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
+    sidebarOpen, setSidebarOpen
   ) => {
 
   // Access index & id of [categories] containing the property "active":"true"
@@ -30,6 +31,7 @@ const eventHandlers = (
     .then(() => {
       setCategorySelected(true);
       setCategoryInput("");
+      setSidebarOpen(false);
     }).catch(error => console.error(`Error adding category: ${error}`));
   };
 
@@ -40,6 +42,7 @@ const eventHandlers = (
     firestore.collection("categories").doc(actID).update({ active: false })
     .then(() => {
       setCategorySelected(true);
+      setSidebarOpen(false);
       // Activate new category
       const id = e.target.dataset.id;
       return firestore.collection("categories").doc(id).update({ active: true });
@@ -158,6 +161,8 @@ const eventHandlers = (
     }).catch(error => console.log(error));
   };
 
+  const openSidebar = () => setSidebarOpen(!sidebarOpen);
+
   return {
     addCategory,
     changeCategory,
@@ -168,6 +173,7 @@ const eventHandlers = (
     deleteTask,
     clearCompleted,
     signInWithGoogle,
+    openSidebar,
   };
 };
 

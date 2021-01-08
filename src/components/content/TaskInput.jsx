@@ -2,7 +2,6 @@ import React from 'react';
 import "./styles/taskInput.css";
 
 function TaskInput({ categorySelected, submitTask, taskInputState, handleTaskInput, clearCompleted }) {
-
   if (categorySelected) {
     return (
       <div className="task-input">
@@ -19,7 +18,7 @@ function TaskInput({ categorySelected, submitTask, taskInputState, handleTaskInp
       </div>
     )
   } else {
-    return <div></div>
+    return <></>
   }
 }
 

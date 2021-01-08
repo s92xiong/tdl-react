@@ -29,13 +29,17 @@ function App() {
   // Input field to add tasks
   const [taskInput, setTaskInput] = useState("");
 
+  // Initialize variable state to control sidebar open/close
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const { 
     // Retrieve methods from eventHandlers.js
     addCategory, changeCategory, deleteCategory, addTask, handleTaskInput, 
-    completeTask, deleteTask, clearCompleted, signInWithGoogle
+    completeTask, deleteTask, clearCompleted, signInWithGoogle, openSidebar
   } = eventHandlers(
     // Insert arguments here
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
+    sidebarOpen, setSidebarOpen
   );
 
   useEffect(() => {
@@ -45,7 +49,9 @@ function App() {
   
   return (
     <div className="App">
-      <Header />
+      <Header
+        openSidebar={openSidebar}
+      />
       {
         (!user) ?
         // Display the following code if the user is NOT signed in
@@ -59,6 +65,7 @@ function App() {
             categoryInput={categoryInput}
             categories={categories}
             changeCategory={changeCategory}
+            sidebarOpen={sidebarOpen}
           />
           <Content
             // Content Header
