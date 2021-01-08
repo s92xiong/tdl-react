@@ -57,12 +57,12 @@
 
   .task-input input {
     width: 330px;
-    margin: 15px 0 35px 0;
+    margin: 12px 0 30px 0;
     font-size: 16px;
   }
 
   .task-input button {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 }
 
