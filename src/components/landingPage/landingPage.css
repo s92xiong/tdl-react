@@ -73,7 +73,7 @@ a:hover {
 }
 
 /* Portrait Mode */
-@media (max-width: 500px) {
+@media (max-width: 812px) {
   .container-sign-in img {
     width: 75px;
     height: 71px;

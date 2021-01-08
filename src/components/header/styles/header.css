@@ -18,7 +18,7 @@
   display: none;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 812px) {
   /* Remove "To Do" logo and instead add menu bars when width is at 500px */
   /* Additionally, .content in content.css should have width: 100vw */
 

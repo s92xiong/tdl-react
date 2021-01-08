@@ -62,7 +62,7 @@
   color: #0000ff;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 812px) {
   .task-item p {
     font-size: 17px;
   }

@@ -40,7 +40,7 @@
   background: #f3f3f3;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 812px) {
   .sidebar {
     position: absolute;
     top: 0;
@@ -52,5 +52,14 @@
   .sidebar-open {
     left: 0;
     transition: 350ms;
+  }
+
+  .input-category {
+    height: 50px;
+    font-size: 18px;
+  }
+  
+  .li-category {
+    font-size: 18px;
   }
 }
