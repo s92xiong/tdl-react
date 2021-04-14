@@ -119,7 +119,7 @@ const eventHandlers = (
     // Filter through categories, return tasks that are not complete
     const newTaskArray = categories[actIndex].tasks.filter(task => !task.complete);
     firestore.collection("categories").doc(actID).update({ tasks: newTaskArray });
-  }
+  };
 
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
