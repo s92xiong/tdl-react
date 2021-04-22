@@ -34,8 +34,16 @@ function App() {
 
   const { 
     // Retrieve methods from eventHandlers.js
-    addCategory, changeCategory, deleteCategory, addTask, handleTaskInput, 
-    completeTask, deleteTask, clearCompleted, signInWithGoogle, openSidebar
+    addCategory, 
+    changeCategory, 
+    deleteCategory, 
+    addTask, 
+    handleTaskInput, 
+    completeTask, 
+    deleteTask, 
+    clearCompleted, 
+    signInWithGoogle, 
+    openSidebar
   } = eventHandlers(
     // Insert arguments here
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
@@ -43,7 +51,6 @@ function App() {
   );
 
   useEffect(() => {
-    // Execute only if "user" is logged in, otherwise 'auth' in getCategories.js will cause a crash
     if (user) getCategories(setCategories);
   }, [user]);
   
