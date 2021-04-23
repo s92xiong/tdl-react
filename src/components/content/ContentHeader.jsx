@@ -11,7 +11,7 @@ function ContentHeader({ categorySelected, handleDeleteCategory, categories }) {
         <h2>{activeCategory}</h2>
         { 
           (activeCategory) ? 
-          <FaTrashAlt size={20} className="fa fa-trash trash-icon" />
+          <FaTrashAlt size={19} className="fa fa-trash trash-icon" />
           :
           <></>
         }
