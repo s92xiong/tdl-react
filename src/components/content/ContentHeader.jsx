@@ -1,5 +1,6 @@
 import React from 'react';
 import getActiveCategory from '../logic/getActiveCategory';
+import { FaTrashAlt } from 'react-icons/fa';
 
 function ContentHeader({ categorySelected, handleDeleteCategory, categories }) {
   const activeCategory = getActiveCategory(categories, "getName");
@@ -8,7 +9,12 @@ function ContentHeader({ categorySelected, handleDeleteCategory, categories }) {
     return (
       <div className="content-header">
         <h2>{activeCategory}</h2>
-        { (activeCategory) ? <i onClick={handleDeleteCategory} className="fa fa-trash trash-icon"></i> : <></> }
+        { 
+          (activeCategory) ? 
+          <FaTrashAlt size={20} className="fa fa-trash trash-icon" />
+          :
+          <></>
+        }
       </div> 
     );
   }
