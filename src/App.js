@@ -53,6 +53,16 @@ function App() {
   useEffect(() => {
     if (user) getCategories(setCategories);
   }, [user]);
+
+  useEffect(() => {
+    // Open the category that was last opened (active)
+    if (user && categories.length > 0) {
+      setCategorySelected(true);
+      setSidebarOpen(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   
   return (
     <div className="App">
