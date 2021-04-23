@@ -51,6 +51,9 @@ const eventHandlers = (
 
 
   const deleteCategory = (e) => {
+    const result = window.confirm("Are you sure you want to delete this list?");
+    if (!result) return;
+
     // Delete category from Firestore database
     firestore.collection("categories").doc(actID).delete()
     .then(() => {

@@ -36,6 +36,10 @@
   color: #707070;
 }
 
+.trash-icon:hover {
+  color: #3232d8;
+}
+
 @media (max-width: 812px) {
   .content {
     width: 100vw;
