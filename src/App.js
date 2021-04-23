@@ -51,14 +51,8 @@ function App() {
   );
 
   useEffect(() => {
-    if (user) getCategories(setCategories);
+    if (user) getCategories(setCategories, setCategorySelected);
   }, [user]);
-
-  useEffect(() => {
-    // When App renders: display previously opened list/category + side bar is closed
-    setCategorySelected(true);
-    setSidebarOpen(false);
-  }, []);
   
   
   return (
