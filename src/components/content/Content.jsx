@@ -16,6 +16,7 @@ const Content = ({ categorySelected, handleDeleteCategory, categories, submitTas
       />
 
       <TaskInput 
+        categories={categories}
         categorySelected={categorySelected}
         submitTask={submitTask}
         taskInputState={taskInputState}

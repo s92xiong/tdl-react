@@ -1,8 +1,8 @@
 import React from 'react';
 import "./styles/taskInput.css";
 
-function TaskInput({ categorySelected, submitTask, taskInputState, handleTaskInput, clearCompleted }) {
-  if (categorySelected) {
+function TaskInput({ categories, categorySelected, submitTask, taskInputState, handleTaskInput, clearCompleted }) {
+  if (categorySelected && categories.length >= 1) {
     return (
       <div className="task-input">
         <form onSubmit={submitTask}>
