@@ -4,7 +4,7 @@ import getActiveCategory from "./getActiveCategory";
 
 const eventHandlers = (
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
-    sidebarOpen, setSidebarOpen
+    sidebarOpen, setSidebarOpen, setTaskModalOpen
   ) => {
 
   // Access index & id of [categories] containing the property "active":"true"
@@ -104,24 +104,23 @@ const eventHandlers = (
   };
 
   
-  const deleteTask = (e) => {
-    // Get data-index from the trash can element clicked on
-    const taskIndex = Number(e.target.dataset.index);
+  const deleteTask = (taskId) => {
+    const handler = async (e) => {
+      // Remove the desired element/task from the newly copied categories array
+      const newTaskArray = categories[actIndex].tasks.filter(task => (task.id !== taskId));
 
-    // Remove the desired element/task from the newly copied categories array
-    const newCategories = [...categories];
-    newCategories[actIndex].tasks.splice(taskIndex, 1);
-
-    // Update Firestore database using the newly updated array
-    firestore.collection("categories").doc(actID).update({ 
-      tasks: newCategories[actIndex].tasks 
-    });
+      // Update Firestore database using the newly updated array
+      await firestore.collection("categories").doc(actID).update({ 
+        tasks: newTaskArray 
+      });
+    };
+    return handler;
   };
 
-  const clearCompleted = (e) => {
+  const clearCompleted = async (e) => {
     // Filter through categories, return tasks that are not complete
     const newTaskArray = categories[actIndex].tasks.filter(task => !task.complete);
-    firestore.collection("categories").doc(actID).update({ tasks: newTaskArray });
+    await firestore.collection("categories").doc(actID).update({ tasks: newTaskArray });
   };
 
   const signInWithGoogle = () => {
@@ -166,6 +165,15 @@ const eventHandlers = (
 
   const openSidebar = () => setSidebarOpen(!sidebarOpen);
 
+  const editTask = (task) => {
+    const handler = () => {
+      setTaskModalOpen(true);
+
+      console.log(task);
+    };
+    return handler;
+  };
+
   return {
     addCategory,
     changeCategory,
@@ -177,6 +185,7 @@ const eventHandlers = (
     clearCompleted,
     signInWithGoogle,
     openSidebar,
+    editTask,
   };
 };
 

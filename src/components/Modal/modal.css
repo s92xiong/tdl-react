@@ -1,0 +1,41 @@
+.task-modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.task-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 270px;
+  background: #fff;
+  border: 1px solid rgb(98, 98, 206);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-modal-button {
+  color: rgb(70, 70, 70);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.inner-modal-container {
+  text-align: center;
+}
+
+@media (max-width: 812px) {
+  .task-modal {
+    width: 90vw;
+    height: 90vw;
+  }
+}

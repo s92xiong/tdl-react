@@ -12,7 +12,7 @@
 }
 
 .task-item p {
-  font-size: 15px;
+  font-size: 0.95em;
   /* font-family: 'Comfortaa', cursive; */
   /* font-family: 'Rubik', sans-serif; */
   font-family: 'Open Sans', sans-serif;
@@ -51,10 +51,6 @@
   align-items: center;
   justify-content: space-between;
   color: #707070;
-}
-
-.task-item {
-  transition: 100ms;
 }
 
 .task-icon:hover {

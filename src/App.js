@@ -12,6 +12,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 
 import './App.css';
+import Modal from './components/Modal/Modal';
 
 function App() {
   // useAuthState checks if user is logged in and returns an object, otherwise return null
@@ -32,6 +33,13 @@ function App() {
   // Initialize variable state to control sidebar open/close
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Control if task modal is open
+  const [taskModalOpen, setTaskModalOpen] = useState(true);
+
+  // Initialize variable for task to edit
+  // eslint-disable-next-line no-unused-vars
+  const [taskToEdit, setTaskToEdit] = useState();
+
   const { 
     // Retrieve methods from eventHandlers.js
     addCategory, 
@@ -43,11 +51,12 @@ function App() {
     deleteTask, 
     clearCompleted, 
     signInWithGoogle, 
-    openSidebar
+    openSidebar,
+    editTask,
   } = eventHandlers(
     // Insert arguments here
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
-    sidebarOpen, setSidebarOpen
+    sidebarOpen, setSidebarOpen, setTaskModalOpen
   );
 
   useEffect(() => {
@@ -88,8 +97,13 @@ function App() {
             completeTask={completeTask}
             deleteTask={deleteTask}
             clearCompleted={clearCompleted}
+            editTask={editTask}
           />
         </div>
+      }
+      {
+        (taskModalOpen) && 
+        <Modal type="Task" modalClassName="task-modal" setTaskModalOpen={setTaskModalOpen} />
       }
     </div>
   );
