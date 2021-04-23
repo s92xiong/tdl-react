@@ -16,10 +16,10 @@ function TaskInput({ categories, categorySelected, submitTask, taskInputState, h
         </form>
         <button onClick={clearCompleted}>Clear Completed</button>
       </div>
-    )
-  } else {
-    return <></>
+    );
   }
+
+  return <></>;
 }
 
 export default TaskInput;
