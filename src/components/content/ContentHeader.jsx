@@ -12,8 +12,8 @@ function ContentHeader({ categorySelected, handleDeleteCategory, categories }) {
         { 
           (activeCategory) ? 
           <div style={{marginTop: "3px"}}>
-            <FaRegEdit size={19} className="trash-icon" />
-            <FaRegTrashAlt size={19} onClick={handleDeleteCategory} className="trash-icon" />
+            <FaRegEdit size={20} className="category-icon" />
+            <FaRegTrashAlt size={20} onClick={handleDeleteCategory} className="category-icon" />
           </div>
           :
           <></>

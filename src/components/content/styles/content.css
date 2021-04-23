@@ -30,14 +30,14 @@
           user-select: none; 
 }
 
-.trash-icon {
+.category-icon {
   margin-left: 10px;
   cursor: pointer;
   color: #707070;
 }
 
-.trash-icon:hover {
-  color: #3232d8;
+.category-icon:hover {
+  color:blue;
 }
 
 @media (max-width: 812px) {

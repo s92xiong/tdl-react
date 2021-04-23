@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import getActiveCategory from '../logic/getActiveCategory';
 import "./styles/taskList.css";
 
@@ -21,12 +22,16 @@ function TaskList({ categories, categorySelected, completeTask, deleteTask }) {
                 ></i>
                 <p className={(task.complete) ? "paragraph-complete" : "paragraph"}>{task.taskName}</p>
               </div>
-              <i data-index={i} onClick={deleteTask} className="fa fa-trash trash-icon-task"></i>
+              {/* <i data-index={i} onClick={deleteTask} className="fa fa-trash trash-icon-task"></i> */}
+              <div className="right-div-task">
+                <FaRegEdit className="task-icon" />
+                <FaRegTrashAlt className="task-icon" />
+              </div>
             </div>
           ))
         }
       </div>
-    )
+    );
   } else {
     return <></>;
   }
