@@ -145,15 +145,13 @@ const eventHandlers = (
             firestore.collection("categories").add({
               active: true,
               createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-              name: "How to use To Do",
+              name: "Reading list",
               tasks: [
-                { taskName: "On the left sidebar, add a new list by typing in a list and pressing the enter key", complete: false, id: Date.now() },
-                // { taskName: "Change lists by clicking on another list in the sidebar", complete: false, id: Date.now() },
-                // { taskName: "Add a new task above by typing something in and pressing enter", complete: false, id: Date.now() },
-                // { taskName: "To complete (or incomplete) a task, click on the respective checkmark", complete: true, id: Date.now() },
-                // { taskName: "You can delete a list or a task by clicking on their respective trash buttons", complete: false, id: Date.now() },
-                // { taskName: "Click the green 'Clear Completed' button to remove all completed tasks", complete: false, id: Date.now() },
-                // { taskName: "Sign out by clicking on your user icon in the top right, then click on the 'Sign Out' tab", complete: false, id: Date.now() },
+                { taskName: "Man's Search For Meaning - Viktor Frankl", complete: true, id: Date.now() },
+                { taskName: "An Astronaut's Guide to Life on Earth - Chris Hadfield", complete: true, id: Date.now() + 1 },
+                { taskName: "How to Win Friends and Influence People - Dale Carnegie", complete: true, id: Date.now() + 2 },
+                { taskName: "Atomic Habits - James Clear", complete: false, id: Date.now() + 3 },
+                { taskName: "Deep Work - Cal Newport", complete: false, id: Date.now() + 4 },
               ],
               userID: auth.currentUser.uid,
             });
