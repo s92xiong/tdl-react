@@ -93,6 +93,13 @@
 @media (max-width: 812px) {
   .task-modal, .list-modal {
     width: 90vw;
-    height: 90vw;
+    height: 33vh;
+  }
+}
+
+@media (max-height: 500px) {
+  .task-modal, .list-modal {
+    width: 70vw;
+    height: 250px;
   }
 }
