@@ -1,7 +1,7 @@
 import React from 'react';
 import "./modal.css";
 
-function Modal({ type, modalClassName, setTaskModalOpen, editInput, taskToEdit, handleSubmitEdit }) {
+function Modal({ type, modalClassName, setTaskModalOpen, taskToEdit, setTaskToEdit, handleSubmitEdit }) {
 
   const closeModal = () => setTaskModalOpen(false);
 
@@ -11,13 +11,8 @@ function Modal({ type, modalClassName, setTaskModalOpen, editInput, taskToEdit, 
     }
   };
 
-  // useEffect(() => {
-  //   document.addEventListener("keydown", closeModal)
-  //   return () => document.removeEventListener("keydown", closeModal);
-  // });
-
   const handleOnChange = (e) => {
-    editInput({ 
+    setTaskToEdit({ 
       ...taskToEdit,
       taskName: e.target.value
     });

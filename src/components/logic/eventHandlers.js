@@ -4,7 +4,7 @@ import getActiveCategory from "./getActiveCategory";
 
 const eventHandlers = (
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
-    sidebarOpen, setSidebarOpen, setTaskModalOpen, setTaskToEdit, taskToEdit
+    sidebarOpen, setSidebarOpen, setTaskModalOpen, taskToEdit, setTaskToEdit
   ) => {
 
   // Access index & id of [categories] containing the property "active":"true"
@@ -165,24 +165,25 @@ const eventHandlers = (
 
   const openSidebar = () => setSidebarOpen(!sidebarOpen);
 
+  // Execute code when user clicks on the edit button
   const openTaskModal = (task) => {
     const handler = () => {
       setTaskModalOpen(true);
       setTaskToEdit({
         taskName: task.taskName,
-        taskIndex: task.id
+        taskId: task.id
       });
     };
     return handler;
   };
 
-  const handleSubmitEdit = async (e) => {
+  const editTask = async (e) => {
     e.preventDefault();
 
     const newCategories = [...categories];
-
     newCategories[actIndex].tasks.forEach(task => {
-      if (task.id === taskToEdit.taskIndex) {
+      // Update the task name in categories state using the taskToEdit variable state
+      if (task.id === taskToEdit.taskId) {
         task.taskName = taskToEdit.taskName
       }
     });
@@ -208,7 +209,7 @@ const eventHandlers = (
     signInWithGoogle,
     openSidebar,
     openTaskModal,
-    handleSubmitEdit
+    editTask
   };
 };
 

@@ -34,7 +34,7 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Control if task modal is open
-  const [taskModalOpen, setTaskModalOpen] = useState(true);
+  const [taskModalOpen, setTaskModalOpen] = useState(false);
 
   // Initialize variable for task to edit
   const [taskToEdit, setTaskToEdit] = useState(null);
@@ -52,11 +52,11 @@ function App() {
     signInWithGoogle, 
     openSidebar,
     openTaskModal,
-    handleSubmitEdit
+    editTask
   } = eventHandlers(
     // Insert arguments here
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
-    sidebarOpen, setSidebarOpen, setTaskModalOpen, setTaskToEdit, taskToEdit
+    sidebarOpen, setSidebarOpen, setTaskModalOpen, taskToEdit, setTaskToEdit
   );
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function App() {
   }, [user]);
 
   // Close modal when component loads
-  useEffect(() => setTaskModalOpen(false), []);
+  // useEffect(() => setTaskModalOpen(false), []);
   
   
   return (
@@ -110,9 +110,9 @@ function App() {
           type="Task" 
           modalClassName="task-modal" 
           setTaskModalOpen={setTaskModalOpen}
-          editInput={setTaskToEdit}
           taskToEdit={taskToEdit}
-          handleSubmitEdit={handleSubmitEdit}
+          setTaskToEdit={setTaskToEdit}
+          handleSubmitEdit={editTask}
         />
       }
     </div>
