@@ -13,12 +13,14 @@ const Navbar = ({ openSidebar, sidebarOpen }) => {
     <div className="header">
       <h1>To Do</h1>
       { 
-        (user) && 
+        (user) ? 
         (sidebarOpen) ? <FaTimes size={32} className="sidebar-icon" onClick={openSidebar} />
         :
         <FaBars size={30} className="bars sidebar-icon" onClick={openSidebar} />
+        :
+        <></>
       }
-      <SignOut />
+      <SignOut / >
     </div>
   );
 };
