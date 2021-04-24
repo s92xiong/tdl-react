@@ -45,22 +45,36 @@
 }
 
 .right-div-task {
-  width: 52px;
+  max-width: auto;
   font-size: 18px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   color: #707070;
+}
+
+.task-icon {
+  font-size: 1.05em;
+}
+
+.trash-icon {
+  margin-left: 20px;
 }
 
 .task-icon:hover {
   color: blue;
   cursor: pointer;
-  font-size: 19px;
 }
 
 @media (max-width: 812px) {
+  .task-item {
+    margin: 5vw;
+  }
+
   .task-item p {
-    font-size: 17px;
+    font-size: 0.95em;
+  }
+
+  .task-icon {
+    margin: 2px;
   }
 }

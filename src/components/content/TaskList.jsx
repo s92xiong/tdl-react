@@ -26,7 +26,7 @@ function TaskList({ categories, categorySelected, completeTask, deleteTask, open
                 </div>
                 <div className="right-div-task">
                   <FaRegEdit className="task-icon" onClick={openTaskModal(task)} />
-                  <FaRegTrashAlt onClick={deleteTask(task.id)} className="task-icon" />
+                  <FaRegTrashAlt onClick={deleteTask(task.id)} className="task-icon trash-icon" />
                 </div>
               </div>
             );
