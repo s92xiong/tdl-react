@@ -4,7 +4,7 @@ import getActiveCategory from "./getActiveCategory";
 
 const eventHandlers = (
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
-    sidebarOpen, setSidebarOpen, setTaskModalOpen, taskToEdit, setTaskToEdit
+    sidebarOpen, setSidebarOpen, setTaskModalOpen, taskToEdit, setTaskToEdit, setListModalOpen, setListToEdit, listToEdit
   ) => {
 
   // Access index & id of [categories] containing the property "active":"true"
@@ -170,8 +170,8 @@ const eventHandlers = (
     const handler = () => {
       setTaskModalOpen(true);
       setTaskToEdit({
-        taskName: task.taskName,
-        taskId: task.id
+        name: task.taskName,
+        id: task.id
       });
     };
     return handler;
@@ -183,8 +183,8 @@ const eventHandlers = (
     const newCategories = [...categories];
     newCategories[actIndex].tasks.forEach(task => {
       // Update the task name in categories state using the taskToEdit variable state
-      if (task.id === taskToEdit.taskId) {
-        task.taskName = taskToEdit.taskName
+      if (task.id === taskToEdit.id) {
+        task.taskName = taskToEdit.name
       }
     });
     
@@ -193,7 +193,31 @@ const eventHandlers = (
     setTaskModalOpen(false);
     setTaskToEdit({
       ...taskToEdit,
-      taskName: "",
+      name: "",
+    });
+  };
+
+  // When user clicks on edit button for list
+  const openListModal = (activeCategory) => {
+    const handler = () => {
+      setListModalOpen(true);
+      setListToEdit({
+        name: activeCategory
+      });
+    };
+    return handler;
+  };
+
+  // Execute code when user presses enter button key on inputfield selected
+  const editListName = async (e) => {
+    e.preventDefault();
+    
+    await firestore.collection("categories").doc(actID).update({ name: listToEdit.name });
+
+    setListModalOpen(false);
+    setListToEdit({
+      ...taskToEdit,
+      name: "",
     });
   };
 
@@ -209,7 +233,9 @@ const eventHandlers = (
     signInWithGoogle,
     openSidebar,
     openTaskModal,
-    editTask
+    editTask,
+    openListModal,
+    editListName
   };
 };
 

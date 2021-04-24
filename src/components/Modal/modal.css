@@ -1,4 +1,4 @@
-.task-modal-bg {
+.task-modal-bg, .list-modal-bg {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
 	animation-duration: 125ms;
 }
 
-.task-modal {
+.task-modal, .list-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -91,7 +91,7 @@
 }
 
 @media (max-width: 812px) {
-  .task-modal {
+  .task-modal, .list-modal {
     width: 90vw;
     height: 90vw;
   }

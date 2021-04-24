@@ -33,14 +33,16 @@ function App() {
   // Initialize variable state to control sidebar open/close
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Control if task modal is open
+  // State to edit task name
   const [taskModalOpen, setTaskModalOpen] = useState(false);
-
-  // Initialize variable for task to edit
   const [taskToEdit, setTaskToEdit] = useState(null);
 
+  // State to edit list name
+  const [listModalOpen, setListModalOpen] = useState(false);
+  const [listToEdit, setListToEdit] = useState(null);
+
+  // Retrieve methods from eventHandlers.js
   const { 
-    // Retrieve methods from eventHandlers.js
     addCategory, 
     changeCategory, 
     deleteCategory, 
@@ -52,20 +54,19 @@ function App() {
     signInWithGoogle, 
     openSidebar,
     openTaskModal,
-    editTask
+    editTask,
+    openListModal,
+    editListName
   } = eventHandlers(
     // Insert arguments here
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
-    sidebarOpen, setSidebarOpen, setTaskModalOpen, taskToEdit, setTaskToEdit
+    sidebarOpen, setSidebarOpen, setTaskModalOpen, taskToEdit, setTaskToEdit, setListModalOpen, 
+    setListToEdit, listToEdit
   );
 
   useEffect(() => {
     if (user) getCategories(setCategories, setCategorySelected);
   }, [user]);
-
-  // Close modal when component loads
-  // useEffect(() => setTaskModalOpen(false), []);
-  
   
   return (
     <div className="App">
@@ -92,6 +93,7 @@ function App() {
             categories={categories}
             categorySelected={categorySelected}
             handleDeleteCategory={deleteCategory}
+            openListModal={openListModal}
 
             // Task Content
             submitTask={addTask}
@@ -109,10 +111,21 @@ function App() {
         <Modal 
           type="Task" 
           modalClassName="task-modal" 
-          setTaskModalOpen={setTaskModalOpen}
-          taskToEdit={taskToEdit}
-          setTaskToEdit={setTaskToEdit}
+          setModalOpen={setTaskModalOpen}
+          inputToEdit={taskToEdit}
+          setInputToEdit={setTaskToEdit}
           handleSubmitEdit={editTask}
+        />
+      }
+      {
+        (listModalOpen) && 
+        <Modal 
+          type="List" 
+          modalClassName="list-modal" 
+          setModalOpen={setListModalOpen}
+          inputToEdit={listToEdit}
+          setInputToEdit={setListToEdit}
+          handleSubmitEdit={editListName}
         />
       }
     </div>

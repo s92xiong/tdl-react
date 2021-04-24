@@ -1,16 +1,11 @@
 import React, { useEffect } from 'react';
 import "./modal.css";
 
-function Modal({ type, modalClassName, setTaskModalOpen, taskToEdit, setTaskToEdit, handleSubmitEdit }) {
+function Modal({ type, modalClassName, setModalOpen, inputToEdit, setInputToEdit, handleSubmitEdit }) {
 
-  const closeModal = () => setTaskModalOpen(false);
+  const closeModal = () => setModalOpen(false);
   const pressEsc = (e) => (e.key === "Escape") && closeModal();
-
-  const handleOutsideClick = (e) => {
-    if (e.target.className.includes("modal-bg")) {
-      setTaskModalOpen(false);
-    }
-  };
+  const handleOutsideClick = (e) => (e.target.className.includes("modal-bg")) && setModalOpen(false);
 
   useEffect(() => {
     document.addEventListener("keydown", pressEsc);
@@ -18,13 +13,13 @@ function Modal({ type, modalClassName, setTaskModalOpen, taskToEdit, setTaskToEd
   });
 
   const handleOnChange = (e) => {
-    setTaskToEdit({ 
-      ...taskToEdit,
-      taskName: e.target.value
+    setInputToEdit({ 
+      ...inputToEdit,
+      name: e.target.value
     });
   };
 
-  if (!taskToEdit) return <></>;
+  if (!inputToEdit) return <></>;
   return (
     <div className={`${modalClassName}-bg modal-bg`} onClick={handleOutsideClick}>
       <div className={`${modalClassName} modal-open`}>
@@ -33,9 +28,9 @@ function Modal({ type, modalClassName, setTaskModalOpen, taskToEdit, setTaskToEd
           <h3>Edit {type}</h3>
           <input 
             type="text"
-            placeholder="Edit task name"
+            placeholder="Edit name"
             maxLength="76"
-            value={taskToEdit.taskName}
+            value={inputToEdit.name}
             onChange={handleOnChange}
           />
         </form>
