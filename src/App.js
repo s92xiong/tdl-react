@@ -72,6 +72,7 @@ function App() {
     <div className="App">
       <Navbar
         openSidebar={openSidebar}
+        sidebarOpen={sidebarOpen}
       />
       {
         (!user) ?

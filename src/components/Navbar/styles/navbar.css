@@ -32,7 +32,7 @@
     display: none;
   }
 
-  .bars {
+  .bars, .sidebar-icon {
     display: block;
     color: #f3f3f3;
     font-size: 27px;
