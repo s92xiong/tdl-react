@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import eventHandlers from './components/logic/eventHandlers';
-import Header from './components/header/Header.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
 import LandingPage from './components/landingPage/LandingPage.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Content from './components/content/Content.jsx';
@@ -70,7 +70,7 @@ function App() {
   
   return (
     <div className="App">
-      <Header
+      <Navbar
         openSidebar={openSidebar}
       />
       {

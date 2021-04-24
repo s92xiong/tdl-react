@@ -1,9 +1,9 @@
 import React from "react";
-import "./styles/header.css";
+import "./styles/navbar.css";
 import SignOut from "./SignOut";
 import { FaBars } from "react-icons/fa";
 
-const Header = ({ openSidebar }) => {
+const Navbar = ({ openSidebar }) => {
   return (
     <div className="header">
       <h1>To Do</h1>
@@ -13,4 +13,4 @@ const Header = ({ openSidebar }) => {
   );
 };
 
-export default Header;
+export default Navbar;

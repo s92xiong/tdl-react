@@ -7,12 +7,12 @@ function TaskInput({ categories, categorySelected, submitTask, taskInputState, h
       <div className="task-input">
         <form onSubmit={submitTask}>
           <input 
-              type="text" 
-              placeholder="＋ Add a task" 
-              value={taskInputState}
-              onChange={handleTaskInput}
-              maxLength="76"
-            />
+            type="text" 
+            placeholder="＋ Add a task" 
+            value={taskInputState}
+            onChange={handleTaskInput}
+            maxLength="76"
+          />
         </form>
         <button onClick={clearCompleted}>Clear Completed</button>
       </div>
