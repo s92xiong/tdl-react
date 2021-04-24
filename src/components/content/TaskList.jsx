@@ -3,7 +3,7 @@ import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import getActiveCategory from '../logic/getActiveCategory';
 import "./styles/taskList.css";
 
-function TaskList({ categories, categorySelected, completeTask, deleteTask, editTask }) {
+function TaskList({ categories, categorySelected, completeTask, deleteTask, openTaskModal }) {
 
   const index = getActiveCategory(categories, "getIndex");
   
@@ -25,7 +25,7 @@ function TaskList({ categories, categorySelected, completeTask, deleteTask, edit
                   <p className={(task.complete) ? "paragraph-complete" : "paragraph"}>{task.taskName}</p>
                 </div>
                 <div className="right-div-task">
-                  <FaRegEdit className="task-icon" onClick={editTask(task)} />
+                  <FaRegEdit className="task-icon" onClick={openTaskModal(task)} />
                   <FaRegTrashAlt onClick={deleteTask(task.id)} className="task-icon" />
                 </div>
               </div>

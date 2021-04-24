@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import "./modal.css";
 
-function Modal({ type, modalClassName, setTaskModalOpen }) {
+function Modal({ type, modalClassName, setTaskModalOpen, editInput, taskToEdit, handleSubmitEdit }) {
 
   const closeModal = () => setTaskModalOpen(false);
 
@@ -11,20 +11,26 @@ function Modal({ type, modalClassName, setTaskModalOpen }) {
     }
   };
 
-  const handleSubmitEdit = () => console.log("Editing task..");
+  // useEffect(() => {
+  //   document.addEventListener("keydown", closeModal)
+  //   return () => document.removeEventListener("keydown", closeModal);
+  // });
 
-  useEffect(() => {
-    document.addEventListener("keydown", closeModal)
-    return () => document.removeEventListener("keydown", closeModal);
-  });
+  const handleOnChange = (e) => {
+    editInput({ 
+      ...taskToEdit,
+      taskName: e.target.value
+    });
+  };
 
+  if (!taskToEdit) return <></>;
   return (
     <div className={`${modalClassName}-bg modal-bg`} onClick={handleOutsideClick}>
       <div className={`${modalClassName} modal-open`}>
         <div className="close-modal-button" onClick={closeModal}>✕</div>
         <form className="inner-modal-container" onSubmit={handleSubmitEdit}>
           <h2>Edit {type}</h2>
-          <input type="text" />
+          <input type="text" value={taskToEdit.taskName} onChange={handleOnChange} />
         </form>
       </div>
     </div>

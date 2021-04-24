@@ -4,7 +4,7 @@ import getActiveCategory from "./getActiveCategory";
 
 const eventHandlers = (
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
-    sidebarOpen, setSidebarOpen, setTaskModalOpen
+    sidebarOpen, setSidebarOpen, setTaskModalOpen, setTaskToEdit, taskToEdit
   ) => {
 
   // Access index & id of [categories] containing the property "active":"true"
@@ -148,12 +148,12 @@ const eventHandlers = (
               name: "How to use To Do",
               tasks: [
                 { taskName: "On the left sidebar, add a new list by typing in a list and pressing the enter key", complete: false, id: Date.now() },
-                { taskName: "Change lists by clicking on another list in the sidebar", complete: false, id: Date.now() },
-                { taskName: "Add a new task above by typing something in and pressing enter", complete: false, id: Date.now() },
-                { taskName: "To complete (or incomplete) a task, click on the respective checkmark", complete: true, id: Date.now() },
-                { taskName: "You can delete a list or a task by clicking on their respective trash buttons", complete: false, id: Date.now() },
-                { taskName: "Click the green 'Clear Completed' button to remove all completed tasks", complete: false, id: Date.now() },
-                { taskName: "Sign out by clicking on your user icon in the top right, then click on the 'Sign Out' tab", complete: false, id: Date.now() },
+                // { taskName: "Change lists by clicking on another list in the sidebar", complete: false, id: Date.now() },
+                // { taskName: "Add a new task above by typing something in and pressing enter", complete: false, id: Date.now() },
+                // { taskName: "To complete (or incomplete) a task, click on the respective checkmark", complete: true, id: Date.now() },
+                // { taskName: "You can delete a list or a task by clicking on their respective trash buttons", complete: false, id: Date.now() },
+                // { taskName: "Click the green 'Clear Completed' button to remove all completed tasks", complete: false, id: Date.now() },
+                // { taskName: "Sign out by clicking on your user icon in the top right, then click on the 'Sign Out' tab", complete: false, id: Date.now() },
               ],
               userID: auth.currentUser.uid,
             });
@@ -165,13 +165,35 @@ const eventHandlers = (
 
   const openSidebar = () => setSidebarOpen(!sidebarOpen);
 
-  const editTask = (task) => {
+  const openTaskModal = (task) => {
     const handler = () => {
       setTaskModalOpen(true);
-
-      console.log(task);
+      setTaskToEdit({
+        taskName: task.taskName,
+        taskIndex: task.id
+      });
     };
     return handler;
+  };
+
+  const handleSubmitEdit = async (e) => {
+    e.preventDefault();
+
+    const newCategories = [...categories];
+
+    newCategories[actIndex].tasks.forEach(task => {
+      if (task.id === taskToEdit.taskIndex) {
+        task.taskName = taskToEdit.taskName
+      }
+    });
+    
+    await firestore.collection("categories").doc(actID).update({ tasks: newCategories[actIndex].tasks });
+
+    setTaskModalOpen(false);
+    setTaskToEdit({
+      ...taskToEdit,
+      taskName: "",
+    });
   };
 
   return {
@@ -185,7 +207,8 @@ const eventHandlers = (
     clearCompleted,
     signInWithGoogle,
     openSidebar,
-    editTask,
+    openTaskModal,
+    handleSubmitEdit
   };
 };
 

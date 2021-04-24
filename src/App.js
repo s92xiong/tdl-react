@@ -37,8 +37,7 @@ function App() {
   const [taskModalOpen, setTaskModalOpen] = useState(true);
 
   // Initialize variable for task to edit
-  // eslint-disable-next-line no-unused-vars
-  const [taskToEdit, setTaskToEdit] = useState();
+  const [taskToEdit, setTaskToEdit] = useState(null);
 
   const { 
     // Retrieve methods from eventHandlers.js
@@ -52,16 +51,20 @@ function App() {
     clearCompleted, 
     signInWithGoogle, 
     openSidebar,
-    editTask,
+    openTaskModal,
+    handleSubmitEdit
   } = eventHandlers(
     // Insert arguments here
     categories, categoryInput, setCategoryInput, setCategorySelected, taskInput, setTaskInput,
-    sidebarOpen, setSidebarOpen, setTaskModalOpen
+    sidebarOpen, setSidebarOpen, setTaskModalOpen, setTaskToEdit, taskToEdit
   );
 
   useEffect(() => {
     if (user) getCategories(setCategories, setCategorySelected);
   }, [user]);
+
+  // Close modal when component loads
+  useEffect(() => setTaskModalOpen(false), []);
   
   
   return (
@@ -97,13 +100,20 @@ function App() {
             completeTask={completeTask}
             deleteTask={deleteTask}
             clearCompleted={clearCompleted}
-            editTask={editTask}
+            openTaskModal={openTaskModal}
           />
         </div>
       }
       {
         (taskModalOpen) && 
-        <Modal type="Task" modalClassName="task-modal" setTaskModalOpen={setTaskModalOpen} />
+        <Modal 
+          type="Task" 
+          modalClassName="task-modal" 
+          setTaskModalOpen={setTaskModalOpen}
+          editInput={setTaskToEdit}
+          taskToEdit={taskToEdit}
+          handleSubmitEdit={handleSubmitEdit}
+        />
       }
     </div>
   );

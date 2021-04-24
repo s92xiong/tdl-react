@@ -5,7 +5,7 @@ import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 
 const Content = ({ categorySelected, handleDeleteCategory, categories, submitTask,
-  taskInputState, handleTaskInput, completeTask, deleteTask, clearCompleted, editTask }) => {
+  taskInputState, handleTaskInput, completeTask, deleteTask, clearCompleted, openTaskModal }) => {
     
     return (
     <div className="content">
@@ -29,7 +29,7 @@ const Content = ({ categorySelected, handleDeleteCategory, categories, submitTas
         categorySelected={categorySelected}
         completeTask={completeTask}
         deleteTask={deleteTask}
-        editTask={editTask}
+        openTaskModal={openTaskModal}
       />
     </div>
   );
