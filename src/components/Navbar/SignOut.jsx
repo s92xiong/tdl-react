@@ -10,7 +10,7 @@ function SignOut() {
 
   // Event handlers to open/close modal
   const openModal = () => setModalOpen(!modalOpen);
-  const closeModal = (e) => (e.target.className !== "modal") && setModalOpen(false);
+  const closeModal = (e) => (e.target.className !== "sign-out-modal") && setModalOpen(false);
   
   const signOut = () => {
     setModalOpen(false);
@@ -25,7 +25,7 @@ function SignOut() {
         <OutsideClickHandler onOutsideClick={closeModal}>
           <img src={auth.currentUser.photoURL} onClick={openModal} alt="" className="user-icon" />
         </OutsideClickHandler>
-        { (modalOpen) && <div className="modal" onClick={signOut}>Sign Out</div> }
+        { (modalOpen) && <div className="sign-out-modal" onClick={signOut}>Sign Out</div> }
       </div>
     );
   } else {
